@@ -1,0 +1,8 @@
+- Random Forests (RF) [2]
+- Logistic Regression (LR) [2]
+- Artificial Neural Networks (ANN) [2]
+- Support Vector Machines (SVM) [2]
+- Naïve Bayes [2]
+- Decision Trees (DT) [2]
+- Bagging Decision Trees [2]
+- Adaptive Boosting Decision Trees [2]

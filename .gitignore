@@ -169,3 +169,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Research papers
+/State of the Art/*.pdf
+/State of the Art/*.htm
+/State of the Art/*.html
