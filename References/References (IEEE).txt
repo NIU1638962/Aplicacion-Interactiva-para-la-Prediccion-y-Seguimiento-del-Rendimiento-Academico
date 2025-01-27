@@ -13,4 +13,6 @@
 [13]	N. V. Chawla, K. W. Bowyer, L. O. ​ Hall, and W. P. Kegelmeyer, "SMOTE: Synthetic Minority Over-sampling Technique", Journal of Artificial Intelligence Research, vol. 16, pp. ​ 321-357, 2002. doi: https://doi.org/10.1613/jair.953.
 [14]	A. Ali, S. M. Shamsuddin, and A. L. Ralescu, "Classification with class imbalance problem: A review", Int. J. Advance Soft Compu. Appl, vol. 5, no. 3, pp. 176–204, 2013. Available: https://www.researchgate.net/publication/288228469_Classification_with_class_imbalance_problem_A_review
 [15]	J. Tanha, Y. Abdi, N. Samadi, N. Razzaghi, and M. Asadpour, "Boosting methods for multi-class imbalanced data classification: an experimental review", Journal of Big Data, vol. 7, no. 1, Sep. 2020, doi: https://doi.org/10.1186/s40537-020-00349-y.
+[16]	H. He, Y. Bai, E. A. Garcia, and S. Li, "ADASYN: Adaptive synthetic sampling approach for imbalanced learning", in 2008 IEEE International Joint Conference on Neural Networks (IEEE World Congress on Computational Intelligence), 2008, pp. 1322–1328. doi: https://doi.org/10.1109/IJCNN.2008.4633969.
+
 ​

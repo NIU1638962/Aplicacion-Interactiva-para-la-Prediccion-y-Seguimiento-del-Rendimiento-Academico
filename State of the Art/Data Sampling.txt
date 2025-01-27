@@ -1,0 +1,7 @@
+- Synthetic Minority Over-Sampling Technique (SMOTE) [2, 12, 13, 14]
+- Adaptive Synthetic (ADASYN) [2, 16]
+- Random Over-Sampling [12, 15]
+- Random Under-Sampling [12, 14, 15]
+- Hybrid-Sampling [15]
+- One-Versus-All (OVA) [15]
+- One-Versus-One [15]
