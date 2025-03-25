@@ -72,7 +72,7 @@ elif USER.lower() == 'jtapia':
     REQUIREMENTS_PATH = os.path.join(PROJECT_PATH, 'Requirements')
     RESULTS_PATH = os.path.join(storage_path, 'Results')
     TRAINED_MODELS_PATH = os.path.join(storage_path, 'Trained Models')
-    del storage_path. repository_name
+    del storage_path, repository_name
 else:
     DATA_PATH = os.path.join(PROJECT_PATH, 'Data')
     LOGS_PATH = os.path.join(PROJECT_PATH, 'Logs')
