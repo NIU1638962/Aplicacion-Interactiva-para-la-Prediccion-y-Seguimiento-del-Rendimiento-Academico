@@ -27,7 +27,7 @@ TIME_EXECUTION = datetime.now(timezone.utc).strftime(
 
 # Log level
 LOG_LEVEL = logging.DEBUG
-log_level_name = logging.getLevelName(LOG_LEVEL)
+LOG_LEVEL_NAME = logging.getLevelName(LOG_LEVEL)
 
 # Platform
 PLATFORM = sys.platform.lower()
@@ -103,7 +103,7 @@ TORCH_DEVICE = torch.device('cuda:0' if CUDA_AVAILABLE else 'cpu')
 
 EXECUTION_INFORMATION = (
     f'Time execution: {TIME_EXECUTION}'
-    + f'\nLog level: {log_level_name}'
+    + f'\nLog level: {LOG_LEVEL_NAME}'
     + f'\nPlatform: {PLATFORM}'
     + f'\nUser: {USER}'
     + f'\nPath to project: "{PROJECT_PATH}"'
@@ -125,7 +125,7 @@ EXECUTION_INFORMATION = (
 logging.basicConfig(
     filename=os.path.join(
         LOGS_PATH,
-        f'{TIME_EXECUTION}--{PLATFORM}--{USER}--{log_level_name}.log',
+        f'{TIME_EXECUTION}--{PLATFORM}--{USER}--{LOG_LEVEL_NAME}.log',
     ),
     filemode='w',
     level=LOG_LEVEL,

@@ -4,13 +4,10 @@ Created on Tue Mar 25 21:29:37 2025
 
 @author: Joel Tapia Salvador
 """
-import logging
-import torch
-
 import environment
 
 
-def cuda_memory():
+def cuda_memory() -> tuple[int, int, int]:
     """
     Get information about CUDA's device memory.
 
@@ -19,19 +16,19 @@ def cuda_memory():
 
     Returns
     -------
-    total_memory : TYPE
-        DESCRIPTION.
-    used_memory : TYPE
-        DESCRIPTION.
+    total_memory : integer
+        Number of bytes of the total memory of the CUDA device.
+    used_memory : integer
+        Number of bytes of CUDA device currently used.
     free_memory : TYPE
-        DESCRIPTION.
+        Number of bytes of CUDA device currently free.
 
     """
     total_memory = 0
     free_memory = 0
 
     if environment.CUDA_AVAILABLE and environment.TORCH_DEVICE.type == 'cuda':
-        free_memory, total_memory = torch.cuda.mem_get_info(
+        free_memory, total_memory = environment.torch.cuda.mem_get_info(
             environment.TORCH_DEVICE
         )
 
@@ -47,7 +44,7 @@ def cuda_memory():
         + f'\nFree Memory: {free_memory_mb}MB'
     )
 
-    logging.info(memory_info_mb.replace('\n', '\n\t\t'))
+    environment.logging.info(memory_info_mb.replace('\n', '\n\t\t'))
 
     print(memory_info_mb)
 
