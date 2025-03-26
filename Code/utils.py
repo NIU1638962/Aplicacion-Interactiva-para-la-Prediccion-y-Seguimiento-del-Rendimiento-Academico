@@ -6,8 +6,10 @@ Created on Tue Mar 25 21:29:37 2025
 """
 import environment
 
+from typing import Tuple
 
-def cuda_memory() -> tuple[int, int, int]:
+
+def cuda_memory() -> Tuple[int, int, int]:
     """
     Get information about CUDA's device memory.
 
