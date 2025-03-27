@@ -4,6 +4,7 @@ Created on Thu Jan 23 22:28:45 2025
 
 @author: Joel Tapia Salvador
 """
+import gc
 import logging
 import os
 import sys
@@ -74,6 +75,7 @@ elif USER.lower() == 'jtapia':
     RESULTS_PATH = os.path.join(storage_path, 'Results')
     TRAINED_MODELS_PATH = os.path.join(storage_path, 'Trained Models')
     del storage_path, repository_name
+    gc.collect()
 else:
     DATA_PATH = os.path.join(PROJECT_PATH, 'Data')
     LOGS_PATH = os.path.join(PROJECT_PATH, 'Logs')
