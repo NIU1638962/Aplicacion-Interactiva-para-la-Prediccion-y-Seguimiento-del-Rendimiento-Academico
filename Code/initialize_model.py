@@ -62,7 +62,7 @@ def init_model(
     -------
     model : Torch Module
         Model to be trained.
-    loss : Torch Module
+    loss_function : Torch Module
         Loss function for the training.
     optimizer : Torch Optimizer
         Optimizer for the training.
@@ -95,7 +95,7 @@ def init_model(
     model.to(environment.TORCH_DEVICE)
 
     # Inicialize loss
-    loss = AVAILABLE_LOSSES.get(loss_type, loss_type)(
+    loss_function = AVAILABLE_LOSSES.get(loss_type, loss_type)(
         **loss_init_parameters,
     )
 
@@ -127,4 +127,4 @@ def init_model(
         **optimizer_init_parameters,
     )
 
-    return model, loss, optimizer
+    return model, loss_function, optimizer

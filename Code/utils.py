@@ -25,6 +25,54 @@ def collect_memory():
         environment.torch.cuda.empty_cache()
 
 
+def get_disk_space(path: str) -> Tuple[int, int, int]:
+    """
+    Get information about the path's disk's space.
+
+    Print the disk's space information (total disk space, free disk space,
+    used disk space) of the give path in human redable text and return such
+    information in bytes.
+
+    Parameters
+    ----------
+    path : String
+        Path to look up disk's space.
+
+    Returns
+    -------
+    total_disk_space : Integer
+        Number of bytes of the total disk's space of the path.
+    used_disk_space : Integer
+        Number of bytes currently used of the path.
+    free_disk_space : Integer
+        Number of bytes currently free of the path.
+
+    """
+    disk_space = environment.psutil.disk_usage(path)
+
+    total_disk_space = disk_space.total
+    free_disk_space = disk_space.free
+
+    used_disk_space = total_disk_space - free_disk_space
+
+    redable_free_disk_space = transform_redable_byte_scale(free_disk_space)
+    redable_total_disk_space = transform_redable_byte_scale(total_disk_space)
+    redable_used_disk_space = transform_redable_byte_scale(used_disk_space)
+
+    verbose_redable_disk_space_info = (
+        f'Total Path Disk Space: {redable_total_disk_space}'
+        + f'\nUsed Path Disk Space: {redable_used_disk_space}'
+        + f'\nFree Path Disk Space: {redable_free_disk_space}'
+    )
+
+    environment.logging.info(
+        verbose_redable_disk_space_info.replace('\n', '\n\t\t'))
+
+    print(verbose_redable_disk_space_info)
+
+    return total_disk_space, used_disk_space, free_disk_space
+
+
 def get_memory_cuda() -> Tuple[int, int, int]:
     """
     Get information about CUDA's device memory.
@@ -56,15 +104,17 @@ def get_memory_cuda() -> Tuple[int, int, int]:
     redable_total_memory = transform_redable_byte_scale(total_memory)
     redable_used_memory = transform_redable_byte_scale(used_memory)
 
-    verbose_memory_info_mib = (
+    verbose_redable_memory_info = (
         f'Total CUDA Memory: {redable_total_memory}'
         + f'\nUsed CUDA Memory: {redable_used_memory}'
         + f'\nFree CUDA Memory: {redable_free_memory}'
     )
 
-    environment.logging.info(verbose_memory_info_mib.replace('\n', '\n\t\t'))
+    environment.logging.info(
+        verbose_redable_memory_info.replace('\n', '\n\t\t'),
+    )
 
-    print(verbose_memory_info_mib)
+    print(verbose_redable_memory_info)
 
     return total_memory, used_memory, free_memory
 
@@ -115,26 +165,53 @@ def get_memory_system() -> Tuple[int, int, int]:
     total_memory = memory.total
     free_memory = memory.available
 
-    del memory
-    collect_memory()
-
     used_memory = total_memory - free_memory
 
     redable_free_memory = transform_redable_byte_scale(free_memory)
     redable_total_memory = transform_redable_byte_scale(total_memory)
     redable_used_memory = transform_redable_byte_scale(used_memory)
 
-    verbose_memory_info_mib = (
+    verbose_redable_memory_info = (
         f'Total System Memory: {redable_total_memory}'
         + f'\nUsed System Memory: {redable_used_memory}'
         + f'\nFree System Memory: {redable_free_memory}'
     )
 
-    environment.logging.info(verbose_memory_info_mib.replace('\n', '\n\t\t'))
+    environment.logging.info(
+        verbose_redable_memory_info.replace('\n', '\n\t\t'),
+    )
 
-    print(verbose_memory_info_mib)
+    print(verbose_redable_memory_info)
 
     return total_memory, used_memory, free_memory
+
+
+def load_csv(file_path):
+    with open(file_path) as csv_file:
+        dialect = environment.csv.Sniffer().sniff(csv_file.readline())
+
+    del csv_file
+    collect_memory()
+
+    data = environment.pandas.read_csv(file_path, sep=dialect.delimiter)
+
+    del dialect
+    collect_memory()
+    
+    return data
+
+
+def module_from_file(module_name, file_path):
+    spec = environment.importlib.util.spec_from_file_location(
+        module_name, file_path
+    )
+    module = environment.importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def save_csv(dataframe, file_path):
+    dataframe.to_csv(file_path, index=False)
 
 
 def transform_redable_byte_scale(number_bytes: int) -> str:

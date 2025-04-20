@@ -1,18 +1,39 @@
-[1]	V. Realinho, M. Vieira Martins, J. Machado, and L. Baptista, "Predict Students Dropout and Academic Success", UCI Machine Learning Repository, 2021. doi: https://doi.org/10.24432/C5MC89.
-[2]	M. V. Martins, D. Tolledo, J. Machado, L. M. T. Baptista, and V. Realinho, "Early Prediction of student's Performance in Higher Education: A Case Study", in Trends and Applications in Information Systems and Technologies, 2021, pp. 166–175. doi: https://doi.org/10.1007/978-3-030-72657-7_16.
-[3]	N. Yilmaz and B. Şekeroğlu, "Higher Education Students Performance Evaluation", UCI Machine Learning Repository, 2019. Available: https://doi.org/10.24432/C51G82.
-[4]	N. Yılmaz and B. Sekeroglu, "Student Performance Classification Using Artificial Intelligence Techniques", in 10th International Conference on Theory and Application of Soft Computing, Computing with Words and Perceptions - ICSCCW-2019, 2020, pp. 596–603. doi: https://doi.org/10.1007/978-3-030-35249-3_76.
-[5]	C. Romero and S. Ventura, "Educational Data Mining: A Review of the State of the Art", IEEE Transactions on Systems, Man, and Cybernetics, Part C (Applications and Reviews), vol. 40, no. 6, pp. 601–618, 2010. doi: https://doi.org/10.1109/TSMCC.2010.2053532.
-[6]	N. Mduma, K. Kalegele, and D. Machuve, "A Survey of Machine Learning Approaches and Techniques for Student Dropout Prediction", Data Science Journal, Apr. 2019. doi: https://doi.org/10.5334/dsj-2019-014.
-[7]	A. M. Shahiri, W. Husain, and N. A. Rashid, "A Review on Predicting Student's Performance Using Data Mining Techniques", Procedia Computer Science, vol. 72, pp. 414–422, 2015. doi: https://doi.org/10.1016/j.procs.2015.12.157.
-[8]	J. L. Rastrollo-Guerrero, J. A. Gómez-Pulido, and A. Durán-Domínguez, "Analyzing and Predicting Students Performance by Means of Machine Learning: A Review", Applied Sciences, vol. 10, no. 3, 2020. doi: https://doi.org/10.3390/app10031042.
-[9]	C. Beaulac and J. S. Rosenthal, "Predicting University Students Academic Success and Major Using Random Forests", Research in Higher Education, vol. 60, no. 7, pp. 1048–1064, Nov. 2019. doi: https://doi.org/10.1007/s11162-019-09546-y.
-[10]	A.-S. Hoffait and M. Schyns, "Early detection of university students with potential difficulties", Decision Support Systems, vol. 101, pp. 1–11, Sep. 2017, doi: https://doi.org/10.1016/j.dss.2017.05.003.
-[11]	V. Miguéis, A. Freitas, P. J. Garcia, and A. Silva, "Early segmentation of students according to their academic performance: A predictive modelling approach", Decision Support Systems, vol. 115, pp. 36–51, Nov. 2018, doi: https://doi.org/10.1016/j.dss.2018.09.001.
-[12]	D. Thammasiri, D. Delen, P. Meesad, and N. Kasap, "A critical assessment of imbalanced class distribution problem: The case of predicting freshmen student attrition", Expert Systems with Applications, vol. 41, no. 2, pp. 321–330, Feb. 2014, doi: https://doi.org/10.1016/j.eswa.2013.07.046.
-[13]	N. V. Chawla, K. W. Bowyer, L. O. ​ Hall, and W. P. Kegelmeyer, "SMOTE: Synthetic Minority Over-sampling Technique", Journal of Artificial Intelligence Research, vol. 16, pp. ​ 321-357, 2002. doi: https://doi.org/10.1613/jair.953.
-[14]	A. Ali, S. M. Shamsuddin, and A. L. Ralescu, "Classification with class imbalance problem: A review", Int. J. Advance Soft Compu. Appl, vol. 5, no. 3, pp. 176–204, 2013. Available: https://www.researchgate.net/publication/288228469_Classification_with_class_imbalance_problem_A_review
-[15]	J. Tanha, Y. Abdi, N. Samadi, N. Razzaghi, and M. Asadpour, "Boosting methods for multi-class imbalanced data classification: an experimental review", Journal of Big Data, vol. 7, no. 1, Sep. 2020, doi: https://doi.org/10.1186/s40537-020-00349-y.
-[16]	H. He, Y. Bai, E. A. Garcia, and S. Li, "ADASYN: Adaptive synthetic sampling approach for imbalanced learning", in 2008 IEEE International Joint Conference on Neural Networks (IEEE World Congress on Computational Intelligence), 2008, pp. 1322–1328. doi: https://doi.org/10.1109/IJCNN.2008.4633969.
+[1]	M. V. Martins, D. Tolledo, J. Machado, L. M. T. Baptista, and V. Realinho, "Early Prediction of student's Performance in Higher Education: A Case Study", in Trends and Applications in Information Systems and Technologies, 2021, pp. 166–175. doi: https://doi.org/10.1007/978-3-030-72657-7_16.
+[2]	N. Yılmaz and B. Sekeroglu, "Student Performance Classification Using Artificial Intelligence Techniques", in 10th International Conference on Theory and Application of Soft Computing, Computing with Words and Perceptions - ICSCCW-2019, 2020, pp. 596–603. doi: https://doi.org/10.1007/978-3-030-35249-3_76.
+[3]	C. Romero and S. Ventura, "Educational Data Mining: A Review of the State of the Art", IEEE Transactions on Systems, Man, and Cybernetics, Part C (Applications and Reviews), vol. 40, no. 6, pp. 601–618, 2010. doi: https://doi.org/10.1109/TSMCC.2010.2053532.
+[4]	N. Mduma, K. Kalegele, and D. Machuve, "A Survey of Machine Learning Approaches and Techniques for Student Dropout Prediction", Data Science Journal, Apr. 2019. doi: https://doi.org/10.5334/dsj-2019-014.
+[5]	A. M. Shahiri, W. Husain, and N. A. Rashid, "A Review on Predicting Student's Performance Using Data Mining Techniques", Procedia Computer Science, vol. 72, pp. 414–422, 2015. doi: https://doi.org/10.1016/j.procs.2015.12.157.
+[6]	J. L. Rastrollo-Guerrero, J. A. Gómez-Pulido, and A. Durán-Domínguez, "Analyzing and Predicting Students Performance by Means of Machine Learning: A Review", Applied Sciences, vol. 10, no. 3, 2020. doi: https://doi.org/10.3390/app10031042.
+[7]	C. Beaulac and J. S. Rosenthal, "Predicting University Students Academic Success and Major Using Random Forests", Research in Higher Education, vol. 60, no. 7, pp. 1048–1064, Nov. 2019. doi: https://doi.org/10.1007/s11162-019-09546-y.
+[8]	A.-S. Hoffait and M. Schyns, "Early detection of university students with potential difficulties", Decision Support Systems, vol. 101, pp. 1–11, Sep. 2017, doi: https://doi.org/10.1016/j.dss.2017.05.003.
+[9]	V. Miguéis, A. Freitas, P. J. Garcia, and A. Silva, "Early segmentation of students according to their academic performance: A predictive modelling approach", Decision Support Systems, vol. 115, pp. 36–51, Nov. 2018, doi: https://doi.org/10.1016/j.dss.2018.09.001.
+[10]	D. Thammasiri, D. Delen, P. Meesad, and N. Kasap, "A critical assessment of imbalanced class distribution problem: The case of predicting freshmen student attrition", Expert Systems with Applications, vol. 41, no. 2, pp. 321–330, Feb. 2014, doi: https://doi.org/10.1016/j.eswa.2013.07.046.
+[11]	Python Software Foundation. Python. (2025). Python Software Foundation. [Online]. Available: https://www.python.org
+[12]	Django Software Foundation. Django. (2025). Django Software Foundation. [Online]. Available: https://www.djangoproject.com
+[13]	Pallets. Flask. (2025). Pallets Projects. [Online]. Available: https://flask.palletsprojects.com
+[14]	Tiangolo. FastAPI. (2025). Tiangolo. [Online]. Available: https://fastapi.tiangolo.com
+[15]	Big Sky Software. HTMX. (2025). HTMX. [Online]. Available: https://htmx.org
+[16]	Mozilla. JavaScript. (2025). Mozilla Developer Network. [Online]. Available: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[17]	Caleb Porzio. AlpineJS. (2025). AlpineJS. [Online]. Available: https://alpinejs.dev
+[18]	Meta Open Source. React. (2025). React. [Online]. Available: https://react.dev
+[19]	Bootstrap. Bootstrap. (2025). Bootstrap. [Online]. Available: https://getbootstrap.com
+[20]	Pallets. Jinja. (2025). Pallets Projects. [Online]. Available: https://jinja.palletsprojects.com
+[21]	World Wide Web Consortium, Web Hypertext Application Technology Working Group. HTML Standard. (2025). WHATWG. Available: https://html.spec.whatwg.org
+[22]	The PostgreSQL Global Development Group. PostgresSQL. (2025). The PostgreSQL Global Development Group. Available: https://www.postgresql.org
+[23]	D. Richard Hipp. SQLite. (2025). The SQLite Consortium. Available: https://sqlite.org
+[24]	V. Realinho, M. Vieira Martins, J. Machado, and L. Baptista, "Predict Students Dropout and Academic Success", UCI Machine Learning Repository, 2021. doi: https://doi.org/10.24432/C5MC89.
+[25]	N. Yilmaz and B. Şekeroğlu, "Higher Education Students Performance Evaluation", UCI Machine Learning Repository, 2019. Available: https://doi.org/10.24432/C51G82.
+[26]	P. Cortez. "Student Performance," UCI Machine Learning Repository, 2008. [Online]. Available: https://doi.org/10.24432/C5TG7T.
 
-​
+	J. K. Author. Title of Software. Date Repository or Archive. (version or year). Publisher Name. Accessed: Date (when applicable). [Type of Medium]. Global Persistent Identifier. Available: site/path/file
+
+
+
+[]	N. V. Chawla, K. W. Bowyer, L. O. ​ Hall, and W. P. Kegelmeyer, "SMOTE: Synthetic Minority Over-sampling Technique", Journal of Artificial Intelligence Research, vol. 16, pp. ​ 321-357, 2002. doi: https://doi.org/10.1613/jair.953.
+[]	A. Ali, S. M. Shamsuddin, and A. L. Ralescu, "Classification with class imbalance problem: A review", Int. J. Advance Soft Compu. Appl, vol. 5, no. 3, pp. 176–204, 2013. Available: https://www.researchgate.net/publication/288228469_Classification_with_class_imbalance_problem_A_review
+[]	J. Tanha, Y. Abdi, N. Samadi, N. Razzaghi, and M. Asadpour, "Boosting methods for multi-class imbalanced data classification: an experimental review", Journal of Big Data, vol. 7, no. 1, Sep. 2020, doi: https://doi.org/10.1186/s40537-020-00349-y.
+[]	H. He, Y. Bai, E. A. Garcia, and S. Li, "ADASYN: Adaptive synthetic sampling approach for imbalanced learning", in 2008 IEEE International Joint Conference on Neural Networks (IEEE World Congress on Computational Intelligence), 2008, pp. 1322–1328. doi: https://doi.org/10.1109/IJCNN.2008.4633969.
+
+
+[]	
+[]	

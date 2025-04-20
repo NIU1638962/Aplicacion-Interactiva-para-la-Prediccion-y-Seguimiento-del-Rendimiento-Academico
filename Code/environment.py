@@ -4,12 +4,18 @@ Created on Thu Jan 23 22:28:45 2025
 
 @author: Joel Tapia Salvador
 """
+import csv
 import gc
+import importlib.util
+import json
 import logging
 import os
+import pickle
 import sys
 
+from copy import deepcopy
 from datetime import datetime, timezone
+from time import time
 
 # Modules used
 import matplotlib
@@ -17,6 +23,9 @@ import numpy
 import pandas
 import psutil
 import sklearn
+import sklearn.ensemble
+import sklearn.model_selection
+import sklearn.tree
 import torch
 import torchaudio
 import torchvision
@@ -103,8 +112,12 @@ NUMBER_LOGICAL_PROCESSORS = psutil.cpu_count(logical=True)
 CUDA_AVAILABLE = torch.cuda.is_available()
 TORCH_DEVICE = torch.device('cuda:0' if CUDA_AVAILABLE else 'cpu')
 
+# Prints
+SEPARATOR_LINE = '-' * os.get_terminal_size().columns
+
 EXECUTION_INFORMATION = (
-    f'Time execution: {TIME_EXECUTION}'
+    SEPARATOR_LINE + '\n'
+    + f'Time execution: {TIME_EXECUTION}'
     + f'\nLog level: {LOG_LEVEL_NAME}'
     + f'\nPlatform: {PLATFORM}'
     + f'\nUser: {USER}'
