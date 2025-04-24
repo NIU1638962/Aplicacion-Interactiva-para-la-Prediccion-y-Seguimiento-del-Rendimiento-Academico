@@ -68,7 +68,7 @@ def get_disk_space(path: str) -> Tuple[int, int, int]:
     environment.logging.info(
         verbose_redable_disk_space_info.replace('\n', '\n\t\t'))
 
-    print(verbose_redable_disk_space_info)
+    print_message(verbose_redable_disk_space_info)
 
     return total_disk_space, used_disk_space, free_disk_space
 
@@ -114,7 +114,7 @@ def get_memory_cuda() -> Tuple[int, int, int]:
         verbose_redable_memory_info.replace('\n', '\n\t\t'),
     )
 
-    print(verbose_redable_memory_info)
+    print_message(verbose_redable_memory_info)
 
     return total_memory, used_memory, free_memory
 
@@ -181,7 +181,7 @@ def get_memory_system() -> Tuple[int, int, int]:
         verbose_redable_memory_info.replace('\n', '\n\t\t'),
     )
 
-    print(verbose_redable_memory_info)
+    print_message(verbose_redable_memory_info)
 
     return total_memory, used_memory, free_memory
 
@@ -201,6 +201,16 @@ def load_csv(file_path):
     return data
 
 
+def load_json(file_path):
+    with open(file_path) as file:
+        json_object = environment.json.load(file)
+        
+    del file
+    collect_memory()
+    
+    return json_object
+
+
 def module_from_file(module_name, file_path):
     spec = environment.importlib.util.spec_from_file_location(
         module_name, file_path
@@ -209,6 +219,11 @@ def module_from_file(module_name, file_path):
     spec.loader.exec_module(module)
     return module
 
+
+def print_message(message):
+    environment.logging.info(message)
+    print(message)
+    del message
 
 def save_csv(dataframe, file_path):
     dataframe.to_csv(file_path, index=False)

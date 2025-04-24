@@ -10,19 +10,13 @@ import metrics
 
 def main_train(
         model,
-        inputs_train, 
-        targets_train, 
-        inputs_validation, 
-        targets_validation,
+        train_dataset, 
+        validation_dataset,
 ):
-    model.fit(inputs_train, targets_train)
+    model.fit(train_dataset.inputs, train_dataset.targets)
     
-    predictions = model.predict(inputs_validation)
-    
-    targets_validation = environment.torch.from_numpy(
-        targets_validation.to_numpy()
-    )
+    predictions = model.predict(validation_dataset.inputs)
     
     predictions = environment.torch.from_numpy(predictions)
     
-    print(f'Accuracy: {metrics.accuracy(outputs=predictions, labels=targets_validation)}')
+    print(f'Accuracy: {metrics.accuracy(outputs=predictions, labels=validation_dataset.targets)}')

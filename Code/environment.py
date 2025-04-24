@@ -5,6 +5,7 @@ Created on Thu Jan 23 22:28:45 2025
 @author: Joel Tapia Salvador
 """
 import csv
+import warnings
 import gc
 import importlib.util
 import json
@@ -34,6 +35,9 @@ import torchvision
 TIME_EXECUTION = datetime.now(timezone.utc).strftime(
     '%Y-%m-%d--%H-%M-%S-%f--%Z'
 )
+
+# Seed
+SEED = 0
 
 # Log level
 LOG_LEVEL = logging.DEBUG
@@ -113,11 +117,18 @@ CUDA_AVAILABLE = torch.cuda.is_available()
 TORCH_DEVICE = torch.device('cuda:0' if CUDA_AVAILABLE else 'cpu')
 
 # Prints
-SEPARATOR_LINE = '-' * os.get_terminal_size().columns
+TERMINAL_WIDTH = os.get_terminal_size().columns
+SECTION = '='
+SECTION_LINE = SECTION * TERMINAL_WIDTH
+SEPARATOR = '-'
+SEPARATOR_LINE = SEPARATOR * TERMINAL_WIDTH
 
 EXECUTION_INFORMATION = (
-    SEPARATOR_LINE + '\n'
-    + f'Time execution: {TIME_EXECUTION}'
+    SECTION_LINE
+    + '\nENVIRONMENT INFO\n'
+    + SEPARATOR_LINE
+    + f'\nTime execution: {TIME_EXECUTION}'
+    + f'\nSeed: {SEED}'
     + f'\nLog level: {LOG_LEVEL_NAME}'
     + f'\nPlatform: {PLATFORM}'
     + f'\nUser: {USER}'
@@ -150,7 +161,6 @@ logging.basicConfig(
 )
 
 logging.info(EXECUTION_INFORMATION.replace('\n', '\n\t\t'))
-
 print(EXECUTION_INFORMATION)
 
 # Test modules
@@ -186,3 +196,7 @@ if torchvision.__version__ not in ('0.19.1', '0.19.1+cu121'):
     ERROR = f'Module torchvision 0.19.1 not found ({torchvision.__version__}).'
     logging.critical(ERROR.replace('\n', '\n\t\t'))
     raise ModuleNotFoundError(ERROR)
+
+# Setting modules
+pandas.set_option('display.max_columns', None)
+warnings.filterwarnings("ignore", category=UserWarning)

@@ -21,7 +21,7 @@ def test_batch_metrics_function_equality(
 
     data = {
         'outputs': environment.torch.tensor([]),
-        'labels': environment.torch.tensor([]),
+        'targets': environment.torch.tensor([]),
     }
 
     for i in range(number_batches):
@@ -31,31 +31,31 @@ def test_batch_metrics_function_equality(
         batches[f'batch_{i}']['outputs'] = environment.torch.from_numpy(
             environment.numpy.random.randint(0, 2, len_batch)
         )
-        batches[f'batch_{i}']['labels'] = environment.torch.from_numpy(
+        batches[f'batch_{i}']['targets'] = environment.torch.from_numpy(
             environment.numpy.random.randint(0, 2, len_batch)
         )
 
         data['outputs'] = environment.torch.cat(
             (data['outputs'], batches[f'batch_{i}']['outputs'])
         )
-        data['labels'] = environment.torch.cat(
-            (data['labels'], batches[f'batch_{i}']['labels'])
+        data['targets'] = environment.torch.cat(
+            (data['targets'], batches[f'batch_{i}']['targets'])
         )
 
         batches_metric[f'batch_{i}'] = metric_function(
             outputs=batches[f'batch_{i}']['outputs'],
-            labels=batches[f'batch_{i}']['labels'],
+            targets=batches[f'batch_{i}']['targets'],
         )
 
         batches_metric_total += (
             batches_metric[f'batch_{i}'] *
-            batches[f'batch_{i}']['labels'].size()[0]
+            batches[f'batch_{i}']['targets'].size()[0]
         )
 
-    mean_batch_metric = batches_metric_total / data['labels'].size()[0]
+    mean_batch_metric = batches_metric_total / data['targets'].size()[0]
     real_metric = metric_function(
         outputs=data['outputs'],
-        labels=data['labels'],
+        targets=data['targets'],
     )
 
     print(f'Metric calculating by batch: {mean_batch_metric}')
@@ -69,17 +69,17 @@ def __keywords(**kwargs):
             (
                 'outputs' in arguments_name
             ) and (
-                'labels' in arguments_name
+                'targets' in arguments_name
             )
         ):
             error = (
-                'Expected ("labels", "outputs") arguments, got: (' +
+                'Expected ("targets", "outputs") arguments, got: (' +
                 ", ".join(arguments_name) + ').'
             )
             environment.logging.error(error.replace('\n', '\n\t\t'))
             raise TypeError(error)
 
-        return compare(kwargs['outputs'], kwargs['labels'])
+        return compare(kwargs['outputs'], kwargs['targets'])
 
     if len(kwargs) == 4:
         if not (
@@ -115,18 +115,18 @@ def __keywords(**kwargs):
     raise TypeError(error)
 
 
-def compare(outputs, labels):
+def compare(outputs, targets):
     true_positive = environment.torch.sum(
-        (outputs == labels) & (outputs == 1)
+        (outputs == targets) & (outputs == 1)
     )
     true_negative = environment.torch.sum(
-        (outputs == labels) & (outputs == 0)
+        (outputs == targets) & (outputs == 0)
     )
     false_positive = environment.torch.sum(
-        (outputs != labels) & (outputs == 1)
+        (outputs != targets) & (outputs == 1)
     )
     false_negative = environment.torch.sum(
-        (outputs != labels) & (outputs == 0)
+        (outputs != targets) & (outputs == 0)
     )
 
     return true_positive, true_negative, false_positive, false_negative

@@ -10,43 +10,43 @@ import models_sklearn
 import train_sklearn
 
 from data_merge import merge_data
-from data_split import split_data
+from datasets import get_datasets, k_fold
 
 
 
 def main():
-    merge_data(100)
-    
-    dataset = utils.load_csv(
-        environment.os.path.join(
-            environment.DATA_PATH,
-            'dataset.csv',
-        )    
+    utils.print_message(
+        environment.SECTION_LINE
+        + '\nSTARTING MAIN PROGRAM'
+        
     )
+    environment.NUMBER_GRADES = 100
     
-    inputs, targets = split_data(dataset, 'experiment_1')
+    merge_data()
     
-    k_fold = environment.sklearn.model_selection.StratifiedKFold(
-        n_splits=10,
-        shuffle=True,
+    dataset = get_datasets('experiment_1')
+    
+    utils.print_message(
+        environment.SECTION_LINE
+        + '\nSTARTING TRAINING'
+        
     )
-    
-    for fold, (train_mask, validation_mask) in  enumerate(k_fold.split(inputs, targets)):
-        inputs_train = inputs.iloc[train_mask]
-        inputs_validation = inputs.iloc[validation_mask]
-    
-        targets_train = targets.iloc[train_mask]
-        targets_validation = targets.iloc[validation_mask]
-    
-        for name, model in models_sklearn.models.items():
-            print(environment.SEPARATOR_LINE)
-            print(f'Model: {name}')
+    for name, model in models_sklearn.models.items():
+        utils.print_message(
+            f'{environment.SEPARATOR_LINE}\nTraining Model: {name}'
+        )
+        
+        for fold, train_dataset, validation_dataset in k_fold(dataset, 10):
+            utils.print_message(
+                f'{environment.SECTION * 3}'
+                + f'Fold: {fold}'
+                + f'{environment.SECTION * 3}'
+            )
+            
             train_sklearn.main_train(
                 model(),
-                inputs_train,
-                targets_train,
-                inputs_validation,
-                targets_validation,
+                train_dataset,
+                validation_dataset,
             )
         
     

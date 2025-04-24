@@ -24,6 +24,9 @@
 [24]	V. Realinho, M. Vieira Martins, J. Machado, and L. Baptista, "Predict Students Dropout and Academic Success", UCI Machine Learning Repository, 2021. doi: https://doi.org/10.24432/C5MC89.
 [25]	N. Yilmaz and B. Şekeroğlu, "Higher Education Students Performance Evaluation", UCI Machine Learning Repository, 2019. Available: https://doi.org/10.24432/C51G82.
 [26]	P. Cortez. "Student Performance," UCI Machine Learning Repository, 2008. [Online]. Available: https://doi.org/10.24432/C5TG7T.
+[27]	NumFOCUS, Inc. Pandas. (2025). pandas. Available: https://pandas.pydata.org
+[28]	Skcit-learn. Skcit-learn. (2025). Skcit-learn. Available: https://scikit-learn.org/stable
+[29]	Pytorch. The Linux Fundation. (2025). PyTorch. Available: https://pytorch.org
 
 	J. K. Author. Title of Software. Date Repository or Archive. (version or year). Publisher Name. Accessed: Date (when applicable). [Type of Medium]. Global Persistent Identifier. Available: site/path/file
 

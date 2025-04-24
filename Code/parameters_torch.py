@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- noqa
+s# -*- coding: utf-8 -*- noqa
 """
 Created on Thu Mar 27 01:52:35 2025
 

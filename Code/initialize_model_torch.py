@@ -22,7 +22,6 @@ def init_model(
     optimizer_init_parameters: dict,
     weights_init_type: str,
     bench_mark: bool = False,
-    manual_seed: Union[int, None] = None,
 ) -> Tuple[
     environment.torch.nn.Module,
     environment.torch.nn.Module,
@@ -72,8 +71,8 @@ def init_model(
     environment.torch.backends.cudnn.benchmark = bench_mark
 
     # Seed for reproductibility
-    if manual_seed is not None:
-        environment.torch.manual_seed(manual_seed)
+    if environment.SEED is not None:
+        environment.torch.manual_seed(environment.SEED)
 
     # Initialize model
     model = model_type(
