@@ -8,5 +8,6 @@ import environment
 
 models = {
     'decission_tree': environment.sklearn.tree.DecisionTreeClassifier,
-    'random_forest': environment.sklearn.ensemble.RandomForestClassifier
-    }
+    'random_forest': environment.sklearn.ensemble.RandomForestClassifier,
+    'linear_regression': environment.sklearn.linear_model.LinearRegression,
+}

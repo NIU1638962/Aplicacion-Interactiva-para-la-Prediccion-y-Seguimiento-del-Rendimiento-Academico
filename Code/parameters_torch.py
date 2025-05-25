@@ -1,4 +1,4 @@
-s# -*- coding: utf-8 -*- noqa
+# -*- coding: utf-8 -*- noqa
 """
 Created on Thu Mar 27 01:52:35 2025
 
@@ -96,101 +96,107 @@ def initialize_weights(
 
     """
     for module in model.modules():
-        if isinstance(
-            module,
-            (
-                environment.torch.nn.Conv1d,
-                environment.torch.nn.Conv2d,
-                environment.torch.nn.Conv3d,
-                environment.torch.nn.ConvTranspose1d,
-                environment.torch.nn.ConvTranspose2d,
-                environment.torch.nn.ConvTranspose3d,
-                environment.torch.nn.Linear,
-                environment.torch.nn.Bilinear,
-            ),
-        ):
-            if init_type == 'xavier_normal':
-                environment.torch.nn.init.xavier_normal_(module.weight)
-            elif init_type == 'xavier_uniform':
-                environment.torch.nn.init.xavier_uniform_(module.weight)
-            elif init_type == 'kaiming_normal':
-                environment.torch.nn.init.kaiming_normal_(
-                    module.weight,
-                    mode='fan_in',
-                    nonlinearity='relu',
-                )
-            elif init_type == 'kaiming_uniform':
-                environment.torch.nn.init.kaiming_uniform_(
-                    module.weight,
-                    mode='fan_in',
-                    nonlinearity='relu',
-                )
-            elif init_type == 'orthogonal':
-                environment.torch.nn.init.orthogonal_(module.weight)
+        if getattr(module, 'should_initialize', False):
 
-            if module.bias is not None:
+            if isinstance(
+                module,
+                (
+                    environment.torch.nn.Conv1d,
+                    environment.torch.nn.Conv2d,
+                    environment.torch.nn.Conv3d,
+                    environment.torch.nn.ConvTranspose1d,
+                    environment.torch.nn.ConvTranspose2d,
+                    environment.torch.nn.ConvTranspose3d,
+                    environment.torch.nn.Linear,
+                    environment.torch.nn.Bilinear,
+                ),
+            ):
+                if init_type == 'xavier_normal':
+                    environment.torch.nn.init.xavier_normal_(module.weight)
+                elif init_type == 'xavier_uniform':
+                    environment.torch.nn.init.xavier_uniform_(module.weight)
+                elif init_type == 'kaiming_normal':
+                    environment.torch.nn.init.kaiming_normal_(
+                        module.weight,
+                        mode='fan_in',
+                        nonlinearity='relu',
+                    )
+                elif init_type == 'kaiming_uniform':
+                    environment.torch.nn.init.kaiming_uniform_(
+                        module.weight,
+                        mode='fan_in',
+                        nonlinearity='relu',
+                    )
+                elif init_type == 'orthogonal':
+                    environment.torch.nn.init.orthogonal_(module.weight)
+
+                if module.bias is not None:
+                    environment.torch.nn.init.constant_(module.bias, 0)
+
+            elif isinstance(
+                    module,
+                    (
+                        environment.torch.nn.BatchNorm1d,
+                        environment.torch.nn.BatchNorm2d,
+                        environment.torch.nn.BatchNorm3d,
+                        environment.torch.nn.LayerNorm,
+                        environment.torch.nn.GroupNorm,
+                        environment.torch.nn.InstanceNorm1d,
+                        environment.torch.nn.InstanceNorm2d,
+                        environment.torch.nn.InstanceNorm3d,
+                    ),
+            ):
+                environment.torch.nn.init.constant_(module.weight, 1)
                 environment.torch.nn.init.constant_(module.bias, 0)
 
-        elif isinstance(
-                module,
-                (
-                    environment.torch.nn.BatchNorm1d,
-                    environment.torch.nn.BatchNorm2d,
-                    environment.torch.nn.BatchNorm3d,
-                    environment.torch.nn.LayerNorm,
-                    environment.torch.nn.GroupNorm,
-                    environment.torch.nn.InstanceNorm1d,
-                    environment.torch.nn.InstanceNorm2d,
-                    environment.torch.nn.InstanceNorm3d,
-                ),
-        ):
-            environment.torch.nn.init.constant_(module.weight, 1)
-            environment.torch.nn.init.constant_(module.bias, 0)
+            elif isinstance(
+                    module,
+                    (
+                        environment.torch.nn.LSTM,
+                        environment.torch.nn.GRU,
+                        environment.torch.nn.RNN,
+                    ),
+            ):
+                for name, param in module.named_parameters():
+                    if 'weight' in name:
+                        if init_type in ('xavier_normal', 'xavier_uniform'):
+                            environment.torch.nn.init.xavier_uniform_(param)
+                        elif init_type in (
+                            'kaiming_normal',
+                            'kaiming_uniform',
+                        ):
+                            environment.torch.nn.init.kaiming_uniform_(param)
+                        elif init_type == 'orthogonal':
+                            environment.torch.nn.init.orthogonal_(param)
+                    elif 'bias' in name:
+                        environment.torch.nn.init.constant_(param, 0)
 
-        elif isinstance(
-                module,
-                (
-                    environment.torch.nn.LSTM,
-                    environment.torch.nn.GRU,
-                    environment.torch.nn.RNN,
-                ),
-        ):
-            for name, param in module.named_parameters():
-                if 'weight' in name:
-                    if init_type in ('xavier_normal', 'xavier_uniform'):
-                        environment.torch.nn.init.xavier_uniform_(param)
-                    elif init_type in ('kaiming_normal', 'kaiming_uniform'):
-                        environment.torch.nn.init.kaiming_uniform_(param)
-                    elif init_type == 'orthogonal':
-                        environment.torch.nn.init.orthogonal_(param)
-                elif 'bias' in name:
-                    environment.torch.nn.init.constant_(param, 0)
+            elif isinstance(module, environment.torch.nn.Embedding):
+                environment.torch.nn.init.normal_(module.weight, mean=0, std=1)
 
-        elif isinstance(module, environment.torch.nn.Embedding):
-            environment.torch.nn.init.normal_(module.weight, mean=0, std=1)
-
-        elif isinstance(module, environment.torch.nn.MultiheadAttention):
-            if hasattr(
-                    module,
-                    'in_proj_weight',
-            ) and module.in_proj_weight is not None:
-                environment.torch.nn.init.xavier_uniform_(
-                    module.in_proj_weight
-                )
-            if hasattr(
-                    module,
-                    'out_proj',
-            ) and module.out_proj.weight is not None:
-                environment.torch.nn.init.xavier_uniform_(
-                    module.out_proj.weight
-                )
-            if hasattr(
-                    module,
-                    'in_proj_bias',
-            ) and module.in_proj_bias is not None:
-                environment.torch.nn.init.constant_(module.in_proj_bias, 0)
-            if hasattr(
-                    module,
-                    'out_proj',
-            ) and module.out_proj.bias is not None:
-                environment.torch.nn.init.constant_(module.out_proj.bias, 0)
+            elif isinstance(module, environment.torch.nn.MultiheadAttention):
+                if hasattr(
+                        module,
+                        'in_proj_weight',
+                ) and module.in_proj_weight is not None:
+                    environment.torch.nn.init.xavier_uniform_(
+                        module.in_proj_weight
+                    )
+                if hasattr(
+                        module,
+                        'out_proj',
+                ) and module.out_proj.weight is not None:
+                    environment.torch.nn.init.xavier_uniform_(
+                        module.out_proj.weight
+                    )
+                if hasattr(
+                        module,
+                        'in_proj_bias',
+                ) and module.in_proj_bias is not None:
+                    environment.torch.nn.init.constant_(module.in_proj_bias, 0)
+                if hasattr(
+                        module,
+                        'out_proj',
+                ) and module.out_proj.bias is not None:
+                    environment.torch.nn.init.constant_(
+                        module.out_proj.bias, 0)

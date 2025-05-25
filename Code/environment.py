@@ -9,10 +9,13 @@ import warnings
 import gc
 import importlib.util
 import json
+import locale
 import logging
+import math
 import os
 import pickle
 import sys
+import types
 
 from copy import deepcopy
 from datetime import datetime, timezone
@@ -26,6 +29,7 @@ import psutil
 import sklearn
 import sklearn.ensemble
 import sklearn.model_selection
+import sklearn.linear_model
 import sklearn.tree
 import torch
 import torchaudio
@@ -105,7 +109,7 @@ os.makedirs(LOGS_PATH, exist_ok=True)
 os.makedirs(PICKLE_PATH, exist_ok=True)
 os.makedirs(REQUIREMENTS_PATH, exist_ok=True)
 os.makedirs(RESULTS_PATH, exist_ok=True)
-os.makedirs(RESULTS_PATH, exist_ok=True)
+os.makedirs(TRAINED_MODELS_PATH, exist_ok=True)
 
 # CPU cores
 NUMBER_PHYSICAL_PROCESSORS = psutil.cpu_count(logical=False)
@@ -139,7 +143,7 @@ EXECUTION_INFORMATION = (
     + f'\nPath to pickle: "{PICKLE_PATH}"'
     + f'\nPath to requirements: "{REQUIREMENTS_PATH}"'
     + f'\nPath to results: "{RESULTS_PATH}"'
-    + f'\nPath to trained models: "{RESULTS_PATH}"'
+    + f'\nPath to trained models: "{TRAINED_MODELS_PATH}"'
     + f'\nPhysical Processors: {NUMBER_PHYSICAL_PROCESSORS}'
     + f'\nLogical Processors: {NUMBER_LOGICAL_PROCESSORS}'
     + f'\nCuda available: {CUDA_AVAILABLE}'
@@ -198,5 +202,7 @@ if torchvision.__version__ not in ('0.19.1', '0.19.1+cu121'):
     raise ModuleNotFoundError(ERROR)
 
 # Setting modules
+matplotlib.pyplot.ioff()
 pandas.set_option('display.max_columns', None)
-warnings.filterwarnings("ignore", category=UserWarning)
+pandas.set_option('display.max_rows', None)
+# warnings.filterwarnings("ignore", category=UserWarning)

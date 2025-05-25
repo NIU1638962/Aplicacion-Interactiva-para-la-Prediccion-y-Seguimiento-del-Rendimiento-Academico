@@ -4,99 +4,194 @@ Created on Thu Mar 27 22:23:11 2025
 
 @author: Joel Tapia Salvador
 """
-from typing import Callable, Dict, Tuple, Union
+from typing import Dict, List, Tuple, Union
+
 import environment
 import utils
 
 
-def main_train(
+def train(
         model: environment.torch.nn.Module,
-        loss_function: environment.torch.nn.Module,
+        losses_functions: Dict[str, List[Union[environment.torch.nn.Module, float]]],
         optimizer: environment.torch.optim.Optimizer,
         number_epochs: int,
-        train_dataloader: environment.torch.utils.data.DataLoader,
-        validation_dataloader: Union[
-            environment.torch.utils.data.DataLoader,
-            None,
-        ],
-        added_metrics: Dict[
-            str,
-            Callable[
-                [environment.torch.Tensor, environment.torch.Tensor],
-                float,
-            ],
-        ] = {},
+        max_grad_norm: int,
+        dataloaders: Dict[str, environment.torch.utils.data.DataLoader],
+        metrics_classes,
+        metrics: List[str] = [],
         objective: Tuple[str] = ('loss', 'minimize', 'validation'),
+        learning_rate_schedulers=[],
 ):
-    if validation_dataloader is None:
-        phases = ('train')
-    else:
-        phases = ('train', 'validation')
-
     time_log = {}
 
     metrics_log = {
         name_metric: {
-            phase: [] for phase in phases
-        } for name_metric in added_metrics.keys()
+            phase: [] for phase in environment.PHASES
+        } for name_metric in metrics if getattr(
+            getattr(metrics_classes['metrics_classes'][0], name_metric, False),
+            'is_metric',
+            False,
+        )
     }
 
-    dataloaders = {}
+    metrics_log['loss'] = {}
+    metrics_log['total_grad_norm'] = {}
 
-    for phase in phases:
-        metrics_log[phase]['loss'] = []
+    for phase in environment.PHASES:
+        metrics_log['loss'][phase] = []
+        metrics_log['total_grad_norm'][phase] = {
+            type_total_grad_norm: environment.wandb.Table(
+                columns=["epoch", "batch", "value"],
+            ) for type_total_grad_norm in ('gotten', 'clipped')
+        }
         time_log[phase] = []
-        dataloaders[phase] = locals()[f'{phase}__dataloader']
-        del locals()[f'{phase}__dataloader']
 
     best_model = BestModel(model.state_dict(), objective[1])
 
-    for epoch in range(1, number_epochs + 1):
-        epoch_information = f'Running epoch {epoch}/{number_epochs}'
-        environment.logging.info(epoch_information.replace('\n', '\n\t\t'))
-        print(environment.SEPARATOR_LINE + '\n' + epoch_information)
-
-        for phase in phases:
-            model, mean_loss, epoch_time = __epoch(
-                model,
-                loss_function,
-                optimizer,
-                dataloaders[phase],
-                phase,
+    try:
+        for epoch in range(1, number_epochs + 1):
+            utils.print_message(
+                f'{environment.SEPARATOR * 3}'
+                + f'Epoch {epoch}/{number_epochs}'
+                + f'{environment.SEPARATOR * 3}'
             )
 
-            metrics_log['loss'][phase].append(mean_loss)
-            time_log[phase].append(epoch_time)
-            del mean_loss, epoch_time
+            for phase in environment.PHASES:
+                utils.print_message(
+                    f'{environment.MARKER}'
+                    + f'Phase: {phase}'
+                    + f'{environment.MARKER}'
+                )
+
+                (
+                    model,
+                    mean_loss,
+                    epoch_time,
+                    metrics_classes,
+                    total_grad_norm,
+                ) = __epoch(
+                    model=model,
+                    losses_functions=losses_functions,
+                    optimizer=optimizer,
+                    dataloader=dataloaders[phase],
+                    learning_rate_schedulers=learning_rate_schedulers,
+                    phase=phase,
+                    metrics_classes=metrics_classes,
+                    max_grad_norm=max_grad_norm,
+                )
+
+                utils.print_message('Calculating phase final metrics...')
+
+                metrics_log['loss'][phase].append(mean_loss)
+                for type_total_grad_norm, values in total_grad_norm.items():
+                    for batch, value in enumerate(values):
+                        metrics_log[
+                            'total_grad_norm'
+                        ][phase][type_total_grad_norm].add_data(
+                            epoch,
+                            batch,
+                            value,
+                        )
+
+                        del batch, value
+                        utils.collect_memory()
+
+                    del type_total_grad_norm
+                    utils.collect_memory()
+
+                time_log[phase].append(epoch_time)
+
+                for metric_name in metrics:
+                    metrics_log[metric_name][phase].append(
+                        environment.torch.tensor(
+                            [
+                                weight * metrics_class.__getattribute__(
+                                    metric_name
+                                )() for metrics_class, weight in zip(
+                                    metrics_classes['metrics_classes'],
+                                    metrics_classes['weights'],
+                                )
+                            ]
+                        ).sum().item()
+                    )
+
+                    del metric_name
+                    utils.collect_memory()
+
+                for metrics_class in metrics_classes['metrics_classes']:
+                    metrics_class.reset()
+
+                del mean_loss, epoch_time, total_grad_norm, phase
+                utils.collect_memory()
+
+                utils.print_message('Calculated phase final metrics.')
+
+            if len(learning_rate_schedulers) > 0:
+                utils.print_message(
+                    f'{environment.MARKER}'
+                    + 'Updating learning rate'
+                    + f'{environment.MARKER}'
+                )
+
+            __update_learning_rate(
+                learning_rate_schedulers,
+                metrics_log,
+                'epoch',
+            )
+
+            utils.print_message(
+                f'{environment.MARKER}'
+                + f'Results epoch'
+                + f'{environment.MARKER}\n'
+                + '\n'.join(
+                    f'Time {phase}: {time_log[phase][-1]} seconds' for phase in environment.PHASES
+                )
+                + '\n'
+                + '\n'.join(
+                    f'Loss {phase}: {metrics_log["loss"][phase][-1]}' for phase in environment.PHASES
+                )
+            )
+
+            best_model.update(
+                epoch,
+                time_log[objective[2]][epoch - 1],
+                metrics_log[objective[0]][objective[2]][epoch - 1],
+                model.state_dict(),
+            )
+
+            del epoch
             utils.collect_memory()
 
-        del phase
-        utils.collect_memory()
-
-        best_model.update(
-            epoch,
-            time_log[objective[2]][epoch - 1],
-            metrics_log[objective[0]][objective[2]],
-            model.state_dict(),
+        utils.print_message(
+            f'{environment.SEPARATOR * 3}'
+            + f'Best model'
+            + f'{environment.SEPARATOR * 3}'
+            + f'\nIn epoch: {best_model.epoch_number}\n'
+            + f'With {objective[2]} {objective[0]}: {best_model.model_metric}'
+            + f'\nTook: {best_model.epoch_time} seconds'
         )
+    except KeyboardInterrupt:
+        utils.print_message('Stopped.')
+    except BaseException:
+        utils.print_error()
+        raise
+    finally:
+        return best_model.model_parameters
 
 
 def __epoch(
     model: environment.torch.nn.Module,
-    loss_function: environment.torch.nn.Module,
+    losses_functions: Dict[str, List[environment.torch.nn.Module]],
     optimizer: environment.torch.optim.Optimizer,
     dataloader: environment.torch.utils.data.DataLoader,
+    learning_rate_schedulers: environment.torch.optim.lr_scheduler.LRScheduler,
     phase: str,
-    added_metrics: Dict[
-        str,
-        Callable[
-            [environment.torch.Tensor, environment.torch.Tensor],
-            float,
-        ],
-    ],
+    metrics_classes,
+    max_grad_norm: int,
 ):
     if phase == 'train':
         model.train()
+
     elif phase == 'validation':
         model.eval()
     else:
@@ -106,17 +201,39 @@ def __epoch(
         environment.logging.error(error.replace('\n', '\n\t\t'))
         raise AttributeError(error)
 
+    total_grad_norm = {
+        'gotten': [],
+        'clipped': [],
+    }
+
     with environment.torch.set_grad_enabled(phase == 'train'):
         running_epoch_loss = 0.0
 
-        added_mretics_results = {
-            name_metric: 0
-            for name_metric in added_metrics.keys()
-        }
-
         epoch_start_time = environment.time()
 
+        list_all_logits = [
+            environment.torch.empty(
+                0,
+                dtype=environment.torch.float32,
+            ).to(environment.TORCH_DEVICE) for i in range(
+                len(losses_functions['losses_functions']),
+            )
+        ]
+
+        list_all_targets = [
+            environment.torch.empty(
+                0,
+                dtype=environment.torch.float32,
+            ).to(environment.TORCH_DEVICE) for i in range(
+                len(losses_functions['losses_functions']),
+            )
+        ]
+
         for batch_index, (inputs, targets) in enumerate(dataloader):
+            utils.print_message(
+                f'Computing batch: {batch_index + 1}/{len(dataloader)}'
+            )
+
             batch_size = inputs.size(0)
             optimizer.zero_grad()
 
@@ -126,37 +243,145 @@ def __epoch(
             del inputs
             utils.collect_memory()
 
-            targets = targets.to(environment.TORCH_DEVICE)
-            step_loss = loss_function(outputs, targets)
+            with environment.torch.no_grad():
+                results = model.results(outputs)
 
-            if loss_function.reduction == 'mean':
-                running_epoch_loss += step_loss.item() * batch_size
-            elif loss_function.reduction == 'sum':
-                running_epoch_loss += step_loss.item()
-            else:
-                error = 'Only accepted loss reduction is "mean" or "sum".'
-                environment.logging.error(error.replace('\n', '\n\t\t'))
-                raise AttributeError(error)
+            targets = [
+                target.to(environment.TORCH_DEVICE) for target in targets
+            ]
+            step_loss = 0
+            for (
+                loss_function,
+                weight,
+                output,
+                result,
+                target,
+                metrics_class,
+            ) in zip(
+                losses_functions['losses_functions'],
+                losses_functions['weights'],
+                outputs,
+                results,
+                targets,
+                metrics_classes['metrics_classes'],
+            ):
+
+                if loss_function.reduction == 'mean':
+                    step_loss += (
+                        weight * loss_function(output, target) * batch_size
+                    )
+                elif loss_function.reduction == 'sum':
+                    step_loss += weight * loss_function
+                else:
+                    error = 'Only accepted loss reduction is "mean" or "sum".'
+                    environment.logging.error(error.replace('\n', '\n\t\t'))
+                    raise AttributeError(error)
+
+                metrics_class.update(result, target)
+
+                del (
+                    loss_function,
+                    weight,
+                    output,
+                    result,
+                    target,
+                    metrics_class,
+                )
+                utils.collect_memory()
+
+            running_epoch_loss += step_loss.item()
+
+            # utils.print_message(
+            #     f"step_loss: {step_loss.item()}, batch_size: {batch_size}"
+            # )
 
             if phase == 'train':
                 step_loss.backward()
+
+                total_grad_norm['gotten'].append(
+                    environment.torch.nn.utils.clip_grad_norm_(
+                        model.parameters(),
+                        max_grad_norm,
+                    )
+                )
+
+                total_grad_norm['clipped'].append(
+                    environment.torch.norm(
+                        environment.torch.stack(
+                            [
+                                p.grad.detach().norm(2) for p in model.parameters() if p.grad is not None
+                            ],
+                        ),
+                        2,
+                    ),
+                )
+
                 optimizer.step()
 
-            del step_loss
+                __update_learning_rate(
+                    learning_rate_schedulers,
+                    None,
+                    'batch',
+                )
+
+            elif phase == 'validation':
+                total_grad_norm['gotten'].append('None')
+                total_grad_norm['clipped'].append('None')
+
+            list_all_logits = [
+                environment.torch.cat(
+                    [all_loggits, ouput.detach()]
+                ) for all_loggits, ouput in zip(list_all_logits, outputs)
+            ]
+
+            list_all_targets = [
+                environment.torch.cat(
+                    [all_targets, target.detach()]
+                ) for all_targets, target in zip(list_all_targets, targets)
+            ]
+
+            utils.print_message('Computed')
+
+            del step_loss, outputs, results, targets
             utils.collect_memory()
 
-            for metric_name, function_metric in added_metrics:
-                added_metrics[metric_name] += function_metric(outputs, targets)
+        model.update_threshold(
+            list_all_logits,
+            list_all_targets,
+        )
 
-            del outputs, targets
-            utils.collect_memory()
+        del list_all_logits, list_all_targets
 
         epoch_end_time = environment.time()
         epoch_time = epoch_end_time - epoch_start_time
 
+        # utils.print_message(f"Total running_epoch_loss: {running_epoch_loss}")
+        # utils.print_message(f"Dataset size: {len(dataloader.dataset)}")
+
         mean_epoch_loss = running_epoch_loss / len(dataloader.dataset)
 
-    return model, mean_epoch_loss, epoch_time, added_mretics_results
+        # utils.print_message(f"Final mean_epoch_loss: {mean_epoch_loss}")
+
+    return model, mean_epoch_loss, epoch_time, metrics_classes, total_grad_norm
+
+
+def __update_learning_rate(learning_rate_schedulers, metrics_log, point):
+    for learning_rate_scheduler in learning_rate_schedulers:
+        if learning_rate_scheduler['frequency'] == point:
+            if learning_rate_scheduler['monitor'] is None:
+                learning_rate_scheduler['learning_rate_scheduler'].step()
+            else:
+                learning_rate_scheduler['learning_rate_scheduler'].step(
+                    metrics_log[learning_rate_scheduler['monitor'][0]][
+                        learning_rate_scheduler['monitor'][1]
+                    ][-1]
+                )
+
+            if point == 'epoch':
+                utils.print_message(
+                    'Learning rate now is:'
+                    + f' {learning_rate_scheduler["learning_rate_scheduler"].get_last_lr()[0]}'
+                )
 
 
 class BestModel():
@@ -178,7 +403,7 @@ class BestModel():
             self.__objective = 'minimize'
             initial_metric = float('inf')
         elif objective in ('maximize', 'max', '+'):
-            self.__objective = 'minimize'
+            self.__objective = 'maximize'
             initial_metric = float('-inf')
         else:
             error = (
@@ -221,10 +446,10 @@ class BestModel():
 
         if not isinstance(
                 model_parameters,
-                environment.torch.nn.parameter.Parameter,
+                environment.collections.OrderedDict,
         ):
             error = (
-                '"model_parameters" is not a Torch Parameter'
+                '"model_parameters" is not a Collections Ordered Dictionary'
                 + f', is a {type(model_parameters)}.'
             )
             environment.logging.error(error.replace('\n', '\n\t\t'))
@@ -250,7 +475,7 @@ class BestModel():
         new_epoch_number: int,
         new_epoch_time: float,
         new_model_metric: float,
-        new_model_parameters: environment.torch.nn.parameter.Parameter,
+        new_model_parameters: environment.collections.OrderedDict,
     ) -> bool:
         """
         Update values of best model if the new metric is better than previous.
@@ -272,7 +497,7 @@ class BestModel():
             Duration that the epoch took to train the new model.
         new_model_metric : Float
             Value of the comparasing metric valued over the new model.
-        new_model_parameters : Torch Parameter
+        new_model_parameters : Collections Ordered Dictionary
             Internal parameters of the new model.
 
         Raises
@@ -350,13 +575,13 @@ class BestModel():
         return self.__model_metric
 
     @property
-    def model_parameters(self) -> environment.torch.nn.parameter.Parameter:
+    def model_parameters(self) -> environment.collections.OrderedDict:
         """
         Getter for model parameters.
 
         Returns
         -------
-        Torch Parameter
+        Collections Ordered Dictionary
             Internal parameters of the best model.
 
         """
