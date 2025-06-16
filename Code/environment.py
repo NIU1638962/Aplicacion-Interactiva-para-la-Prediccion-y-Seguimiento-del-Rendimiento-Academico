@@ -7,6 +7,7 @@ Created on Thu Jan 23 22:28:45 2025
 import csv
 import warnings
 import gc
+import hashlib
 import importlib.util
 import json
 import locale

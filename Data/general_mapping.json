@@ -306,7 +306,7 @@
         "None": 20
     },
     "mother_occupation": {
-        "not kown": -1,
+        "not known": -1,
         "student": 0,
         "retired": 1,
         "at home": 2,
@@ -316,7 +316,7 @@
         "other": 6
     },
     "father_occupation": {
-        "not kown": -1,
+        "not known": -1,
         "student": 0,
         "retired": 1,
         "at home": 2,

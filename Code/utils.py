@@ -73,6 +73,16 @@ def get_disk_space(path: str) -> Tuple[int, int, int]:
     return total_disk_space, used_disk_space, free_disk_space
 
 
+def get_hash_string(hash_type: str, string: str) -> str:
+    hash_object = environment.hashlib.new(hash_type)
+
+    hash_object.update(string.encode())
+
+    hash_string = hash_object.hexdigest()
+
+    return hash_string
+
+
 def get_memory_cuda() -> Tuple[int, int, int]:
     """
     Get information about CUDA's device memory.
@@ -192,6 +202,7 @@ def load_csv(
     header='infer',
     skip_blank_lines: bool = True,
     low_memory: bool = True,
+    index_column=None,
 ) -> environment.pandas.DataFrame:
     """
     Load and read a CSV file into a Pandas DataFrame.
@@ -222,6 +233,7 @@ def load_csv(
         header=header,
         skip_blank_lines=skip_blank_lines,
         low_memory=low_memory,
+        index_col=index_column,
     )
 
     del dialect
