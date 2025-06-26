@@ -19,6 +19,7 @@ COPY static/fields.json /server/static/
 COPY templates/main.html /server/templates/
 COPY templates/results.html /server/templates/
 COPY templates/submit.html /server/templates/
+ENV TMPDIR=/var/tmp
 RUN /usr/local/bin/python -m pip install --no-cache-dir --upgrade pip
 RUN rm -rf /root/.cache/pip
 RUN python -m pip install --no-cache-dir --upgrade pip
