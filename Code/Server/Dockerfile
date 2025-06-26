@@ -1,4 +1,4 @@
-FROM python:3.8.10-alpine
+FROM python:3.8.10
 ENV HOME=/root
 RUN mkdir -p /server
 RUN mkdir -p /server/static/
@@ -19,6 +19,8 @@ COPY static/fields.json /server/static/
 COPY templates/main.html /server/templates/
 COPY templates/results.html /server/templates/
 COPY templates/submit.html /server/templates/
+RUN /usr/local/bin/python -m pip install --upgrade pip
+RUN python -m pip install --upgrade pip
 RUN pip3 install -r requirements.txt
 RUN chmod 744 /server/app.py
 ENTRYPOINT ["python3", "-u", "/server/app.py"]
