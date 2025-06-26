@@ -4,5 +4,5 @@
     "model_file_path": ["static", "model.pth"],
     "original_dataset_file_path": ["static", "dataset.csv"],
     "server_ip": "localhost",
-    "server_port": 5000
+    "server_port": 80
 }

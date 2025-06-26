@@ -14,3 +14,5 @@ then
 else
     echo "Does not exist server container that is stopped."
 fi
+
+docker container prune
