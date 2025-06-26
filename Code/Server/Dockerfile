@@ -19,8 +19,11 @@ COPY static/fields.json /server/static/
 COPY templates/main.html /server/templates/
 COPY templates/results.html /server/templates/
 COPY templates/submit.html /server/templates/
-RUN /usr/local/bin/python -m pip install --upgrade pip
-RUN python -m pip install --upgrade pip
-RUN pip3 install -r requirements.txt
+RUN /usr/local/bin/python -m pip install --no-cache-dir --upgrade pip
+RUN rm -rf /root/.cache/pip
+RUN python -m pip install --no-cache-dir --upgrade pip
+RUN rm -rf /root/.cache/pip
+RUN pip3 install --no-cache-dir -r requirements.txt
+RUN rm -rf /root/.cache/pip
 RUN chmod 744 /server/app.py
 ENTRYPOINT ["python3", "-u", "/server/app.py"]
