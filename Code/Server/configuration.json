@@ -3,6 +3,6 @@
     "fields_file_path": ["static", "fields.json"],
     "model_file_path": ["static", "model.pth"],
     "original_dataset_file_path": ["static", "dataset.csv"],
-    "server_ip": "localhost",
+    "server_ip": "0.0.0.0",
     "server_port": 80
 }
