@@ -155,6 +155,9 @@ def test_recomendator(
         rank_changes.append(diff)
 
         if diff > 0:
+            print(idx)
+            print(x)
+            break
             improved += 1
         elif diff == 0:
             same += 1
@@ -180,6 +183,29 @@ def test_recomendator(
     )
 
     return results
+
+
+def recommendator(
+    raw_mapping,
+    float_range_sample,
+    dataset,
+    modifiable_feature_names,
+    model,
+    class_order,
+):
+    modifiable_features_info = prepare_features(
+        raw_mapping,
+        float_range_sample,
+        dataset.feature_names,
+        modifiable_feature_names,
+    )
+
+    return optimize_modifiable_parameters(
+        dataset.inputs[0],
+        model,
+        class_order,
+        modifiable_features_info,
+    )
 
 
 if __name__ == "__main__":

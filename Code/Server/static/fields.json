@@ -1,0 +1,901 @@
+{
+    "marital_status": {
+        "pretty_name": "Marital Status",
+        "description": "The marital status of the student.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Married": 1,
+            "Divorced": 2,
+            "Widower": 3,
+            "Single": 4,
+            "Partner": 5,
+            "Facto Union": 6,
+            "Legally Separated": 7
+        }
+    },
+    "course": {
+        "pretty_name": "Course",
+        "description": "The course level the student is enrolled in.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Early childhood educational development": 0,
+            "Pre-primary education": 1,
+            "Primary education": 2,
+            "General Lower Secondary Education": 3,
+            "Professional Lower Secondary Education": 4,
+            "General Upper Secondary Education": 5,
+            "Professional Upper Secondary Education": 6,
+            "General Post-Secondary Non-Tertiary Education": 7,
+            "Professional Post-Secondary Non-Tertiary Education": 8,
+            "General Short-Cycle Tertiary Education": 9,
+            "Professional Short-Cycle Tertiary Education": 10,
+            "Academic Bachellor's or equivalent level": 11,
+            "Professional Bachellor's or equivalent level": 12,
+            "Orientation unspecified Bachellor's or equivalent level": 13, 
+            "Academic Master's or equivalent level": 14,
+            "Professional Master's or equivalent level": 15,
+            "Orientation unspecified Master's or equivalent level": 16,
+            "Academic Doctoral or equivalent level": 17,
+            "Professional Doctoral or equivalent level": 18,
+            "Orientation unspecified Doctoral or equivalent level": 19,
+            "None": 20 
+        }
+    },
+    "attendance_time": {
+        "pretty_name": "Attendance Time",
+        "description": "The time of day the student attends classes.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "Full Day": 0,
+            "Morning": 1,
+            "Afternoon": 2,
+            "Evening": 3
+        }
+    },
+    "previous_education": {
+        "pretty_name": "Previous Education",
+        "description": "The level of education the student completed before enrolling in the current course.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Early childhood educational development": 0,
+            "Pre-primary education": 1,
+            "Primary education": 2,
+            "General Lower Secondary Education": 3,
+            "Professional Lower Secondary Education": 4,
+            "General Upper Secondary Education": 5,
+            "Professional Upper Secondary Education": 6,
+            "General Post-Secondary Non-Tertiary Education": 7,
+            "Professional Post-Secondary Non-Tertiary Education": 8,
+            "General Short-Cycle Tertiary Education": 9,
+            "Professional Short-Cycle Tertiary Education": 10,
+            "Academic Bachellor's or equivalent level": 11,
+            "Professional Bachellor's or equivalent level": 12,
+            "Orientation unspecified Bachellor's or equivalent level": 13,
+            "Academic Master's or equivalent level": 14,
+            "Professional Master's or equivalent level": 15,
+            "Orientation unspecified Master's or equivalent level": 16,
+            "Academic Doctoral or equivalent level": 17,
+            "Professional Doctoral or equivalent level": 18,
+            "Orientation unspecified Doctoral or equivalent level": 19,
+            "None": 20 
+        }
+    },
+    "previous_education_grade": {
+        "pretty_name": "Previous Education Grade",
+        "description": "The grade achieved in the previous education level.",
+        "type": "range",
+        "data_type": "float",
+        "modifiable": false,
+        "range": [0, 10],
+        "float_steps": [0, 0.25, 0.5, 0.75, 1],
+        "sigma": 10,
+        "mu": 0
+    },
+    "nationality": {
+        "pretty_name": "Nationality",
+        "description": "The country the student is a citizen of.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Afghanistan": 4,
+            "Albania": 8,
+            "Algeria": 12,
+            "Andorra": 20,
+            "Angola": 24,
+            "Antigua and Barbuda": 28,
+            "Azerbaijan": 31,
+            "Argentina": 32,
+            "Australia": 36,
+            "Austria": 40,
+            "Bahamas": 44,
+            "Bahrain": 48,
+            "Bangladesh": 50,
+            "Armenia": 51,
+            "Barbados": 52,
+            "Belgium": 56,
+            "Bhutan": 64,
+            "Bolivia": 68,
+            "Bosnia and Herzegovina": 70,
+            "Botswana": 72,
+            "Brazil": 76,
+            "Belize": 84,
+            "Solomon Islands": 90,
+            "Brunei Darussalam": 96,
+            "Bulgaria": 100,
+            "Myanmar": 104,
+            "Burundi": 108,
+            "Belarus": 112,
+            "Cambodia": 116,
+            "Cameroon": 120,
+            "Canada": 124,
+            "Cabo Verde": 132,
+            "Central African Republic": 140,
+            "Sri Lanka": 144,
+            "Chad": 148,
+            "Chile": 152,
+            "China": 156,
+            "Colombia": 170,
+            "Comoros": 174,
+            "Congo": 178,
+            "Democratic Republic of Congo": 180,
+            "Costa Rica": 188,
+            "Croatia": 191,
+            "Cuba": 192,
+            "Cyprus": 196,
+            "Czechia": 203,
+            "Benin": 204,
+            "Denmark": 208,
+            "Dominican Republic": 214,
+            "Ecuador": 218,
+            "El Salvador": 222,
+            "Equatorial Guinea": 226,
+            "Ethiopia": 231,
+            "Eritrea": 232,
+            "Estonia": 233,
+            "Fiji": 242,
+            "Finland": 246,
+            "France": 250,
+            "Djibouti": 262,
+            "Gabon": 266,
+            "Georgia": 268,
+            "Gambia": 270,
+            "Germany": 276,
+            "Ghana": 288,
+            "Greece": 300,
+            "Grenada": 308,
+            "Guatemala": 320,
+            "Guinea": 324,
+            "Guyana": 328,
+            "Haiti": 332,
+            "Honduras": 340,
+            "Hungary": 348,
+            "Iceland": 352,
+            "India": 356,
+            "Indonesia": 360,
+            "Iran": 364,
+            "Iraq": 368,
+            "Ireland": 372,
+            "Israel": 376,
+            "Italy": 380,
+            "Jamaica": 388,
+            "Japan": 392,
+            "Kazakhstan": 398,
+            "Jordan": 400,
+            "Kenya": 404,
+            "Korea, North": 408,
+            "Korea, South": 410,
+            "Kuwait": 414,
+            "Kyrgyzstan": 417,
+            "Laos": 418,
+            "Lebanon": 422,
+            "Lesotho": 426,
+            "Liberia": 430,
+            "Libya": 434,
+            "Liechtenstein": 438,
+            "Lithuania": 440,
+            "Luxembourg": 442,
+            "Madagascar": 450,
+            "Malawi": 454,
+            "Malaysia": 458,
+            "Maldives": 462,
+            "Mali": 466,
+            "Malta": 470,
+            "Mauritania": 478,
+            "Mauritius": 480,
+            "Mexico": 484,
+            "Monaco": 492,
+            "Mongolia": 496,
+            "Moldova": 498,
+            "Montenegro": 499,
+            "Morocco": 504,
+            "Mozambique": 508,
+            "Oman": 512,
+            "Namibia": 516,
+            "Nauru": 520,
+            "Nepal": 524,
+            "Netherlands": 528,
+            "New Zealand": 554,
+            "Nicaragua": 558,
+            "Niger": 562,
+            "Nigeria": 566,
+            "Norway": 578,
+            "Micronesia": 583,
+            "Marshall Islands": 584,
+            "Palau": 585,
+            "Pakistan": 586,
+            "Panama": 591,
+            "Papua New Guinea": 598,
+            "Paraguay": 600,
+            "Peru": 604,
+            "Philippines": 608,
+            "Poland": 616,
+            "Portugal": 620,
+            "Guinea-Bissau": 624,
+            "Timor-Leste": 626,
+            "Qatar": 634,
+            "Romania": 642,
+            "Russia": 643,
+            "Rwanda": 646,
+            "Saint Kitts and Nevis": 659,
+            "Saint Lucia": 662,
+            "Saint Vincent and the Grenadines": 670,
+            "San Marino": 674,
+            "Sao Tome and Principe": 678,
+            "Saudi Arabia": 682,
+            "Senegal": 686,
+            "Serbia": 688,
+            "Seychelles": 690,
+            "Sierra Leone": 694,
+            "Singapore": 702,
+            "Slovakia": 703,
+            "Vietnam": 704,
+            "Slovenia": 705,
+            "Somalia": 706,
+            "South Africa": 710,
+            "Zimbabwe": 716,
+            "Spain": 724,
+            "South Sudan": 728,
+            "Sudan": 729,
+            "Suriname": 740,
+            "Eswatini": 748,
+            "Sweden": 752,
+            "Switzerland": 756,
+            "Syria": 760,
+            "Tajikistan": 762,
+            "Thailand": 764,
+            "Togo": 768,
+            "Tonga": 776,
+            "Trinidad and Tobago": 780,
+            "United Arab Emirates": 784,
+            "Tunisia": 788,
+            "Turkey": 792,
+            "Turkmenistan": 795,
+            "Tuvalu": 798,
+            "Uganda": 800,
+            "Ukraine": 804,
+            "North Macedonia": 807,
+            "Egypt": 818,
+            "United Kingdom": 826,
+            "Tanzania": 834,
+            "United States": 840,
+            "Burkina Faso": 854,
+            "Uruguay": 858,
+            "Uzbekistan": 860,
+            "Yemen": 887,
+            "Zambia": 894
+        }
+    },
+    "mother_education": {
+        "pretty_name": "Mother's Education",
+        "description": "The highest level of education achieved by the student's mother.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Early childhood educational development": 0,
+            "Pre-primary education": 1,
+            "Primary education": 2,
+            "General Lower Secondary Education": 3,
+            "Professional Lower Secondary Education": 4,
+            "General Upper Secondary Education": 5,
+            "Professional Upper Secondary Education": 6,
+            "General Post-Secondary Non-Tertiary Education": 7,
+            "Professional Post-Secondary Non-Tertiary Education": 8,
+            "General Short-Cycle Tertiary Education": 9,
+            "Professional Short-Cycle Tertiary Education": 10,
+            "Academic Bachellor's or equivalent level": 11,
+            "Professional Bachellor's or equivalent level": 12,
+            "Orientation unspecified Bachellor's or equivalent level": 13,
+            "Academic Master's or equivalent level": 14,
+            "Professional Master's or equivalent level": 15,
+            "Orientation unspecified Master's or equivalent level": 16,
+            "Academic Doctoral or equivalent level": 17,
+            "Professional Doctoral or equivalent level": 18,
+            "Orientation unspecified Doctoral or equivalent level": 19,
+            "None": 20
+        }
+    },
+    "father_education": {
+        "pretty_name": "Father's Education",
+        "description": "The highest level of education achieved by the student's father.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Early childhood educational development": 0,
+            "Pre-primary education": 1,
+            "Primary education": 2,
+            "General Lower Secondary Education": 3,
+            "Professional Lower Secondary Education": 4,
+            "General Upper Secondary Education": 5,
+            "Professional Upper Secondary Education": 6,
+            "General Post-Secondary Non-Tertiary Education": 7,
+            "Professional Post-Secondary Non-Tertiary Education": 8,
+            "General Short-Cycle Tertiary Education": 9,
+            "Professional Short-Cycle Tertiary Education": 10,
+            "Academic Bachellor's or equivalent level": 11,
+            "Professional Bachellor's or equivalent level": 12,
+            "Orientation unspecified Bachellor's or equivalent level": 13,
+            "Academic Master's or equivalent level": 14,
+            "Professional Master's or equivalent level": 15,
+            "Orientation unspecified Master's or equivalent level": 16,
+            "Academic Doctoral or equivalent level": 17,
+            "Professional Doctoral or equivalent level": 18,
+            "Orientation unspecified Doctoral or equivalent level": 19,
+            "None": 20
+        }
+    },
+    "mother_occupation": {
+        "pretty_name": "Mother's Occupation",
+        "description": "The occupation of the student's mother.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Student": 0,
+            "Retired": 1,
+            "At Home": 2,
+            "Government Official": 3,
+            "Private Sector Employee": 4,
+            "Self-Employement": 5,
+            "Other": 6
+        }
+    },
+    "father_occupation": {
+        "pretty_name": "Father's Occupation",
+        "description": "The occupation of the student's father.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Student": 0,
+            "Retired": 1,
+            "At Home": 2,
+            "Government Official": 3,
+            "Private Sector Employee": 4,
+            "Self-Employement": 5,
+            "Other": 6
+        }
+    },
+    "admission_grade": {
+        "pretty_name": "Admission Grade",
+        "description": "The grade achieved by the student at the time of admission.",
+        "type": "range",
+        "data_type": "float",
+        "modifiable": false,
+        "range": [0, 10],
+        "float_steps":[0, 0.25, 0.5, 0.75, 1],
+        "sigma": 10,
+        "mu": 0
+    },
+    "displaced": {
+        "pretty_name": "Displaced",
+        "description": "Indicates if the student is displaced (enrolled, or eligible for enrollment, but has enrolled in another place because of a crisis).",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "special_needs": {
+        "pretty_name": "Special Needs",
+        "description": "Indicates if the student has special needs.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "debtor": {
+        "pretty_name": "Debtor",
+        "description": "Indicates if the student has any debts.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "tuition_fees_up_to_date": {
+        "pretty_name": "Tuition Fees Up to Date",
+        "description": "Indicates if the student's tuition fees are up to date.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "gender": {
+        "pretty_name": "Gender",
+        "description": "Gender of the student.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Female": 0,
+            "Male": 1
+        }
+    },
+    "scholarship": {
+        "pretty_name": "Scholarship",
+        "description": "Indicates if the student has a scholarship.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "age": {
+        "pretty_name": "Age",
+        "description": "The age of the student.",
+        "type": "range",
+        "data_type": "int",
+        "modifiable": false,
+        "range": [0, 122],
+        "sigma": 1,
+        "mu": 0
+    },
+    "international": {
+        "pretty_name": "International",
+        "description": "Indicates if the student is an international student.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "number_siblings": {
+        "pretty_name": "Number of Siblings",
+        "description": "The number of siblings the student has.",
+        "type": "range",
+        "data_type": "int",
+        "modifiable": false,
+        "range": [0, 20],
+        "sigma": 1,
+        "mu": 0
+    },
+    "previous_education_type": {
+        "pretty_name": "Previous Education Type",
+        "description": "The type of previous education the student attended.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Private": 0,
+            "Public": 1,
+            "Other": 2
+        }
+    },
+    "additional_work": {
+        "pretty_name": "Additional Work",
+        "description": "Indicates if the student has additional work outside of their studies.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "extra_curricular_activities": {
+        "pretty_name": "Extra-Curricular Activities",
+        "description": "Indicates if the student participates in extra-curricular activities.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "transportation": {
+        "pretty_name": "Transportation",
+        "description": "The mode of transportation the student uses to get to school.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Bus": 0,
+            "Private Car/Taxi": 1,
+            "Bycicle": 2,
+            "Other": 3
+        }
+    },
+    "accomodation": {
+        "pretty_name": "Accommodation",
+        "description": "The type of accommodation the student lives in.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "With Family": 0,
+            "Dormitory": 1,
+            "Rental": 2,
+            "Other": 3
+        }
+    },
+    "parental_marital_status": {
+        "pretty_name": "Parental Marital Status",
+        "description": "The marital status of the student's parents.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Married": 1,
+            "Divorced": 2,
+            "Widower": 3,
+            "Single": 4,
+            "Partner": 5,
+            "Facto Union": 6,
+            "Legally Separated": 7
+        }
+    },
+    "weekly_study_hours": {
+        "pretty_name": "Weekly Study Hours",
+        "description": "The number of hours the student studies per week.",
+        "type": "range",
+        "data_type": "float",
+        "modifiable": true,
+        "range": [0, 168],
+        "float_steps": [0, 0.5, 1],
+        "sigma": 1,
+        "mu": 0
+    },
+    "reading_frequency_non_scientific": {
+        "pretty_name": "Reading Frequency (Non-Scientific)",
+        "description": "How often the student reads non-scientific material.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "Never": 0,
+            "Sometimes": 1,
+            "Often": 2
+        }
+    },
+    "reading_frequency_scientific": {
+        "pretty_name": "Reading Frequency (Scientific)",
+        "description": "How often the student reads scientific material.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "Never": 0,
+            "Sometimes": 1,
+            "Often": 2
+        }
+    },
+    "attendance_seminars": {
+        "pretty_name": "Attendance at Seminars",
+        "description": "If teh student attends seminars.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "impact_projects_activities": {
+        "pretty_name": "Impact Projects and Activities",
+        "description": "The impact the student percives that Projects and Acitvities have in their performance.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Negative": 0,
+            "Neutral": 1,
+            "Positive": 2
+        }
+    },
+    "attendance_classes": {
+        "pretty_name": "Attendance at Classes",
+        "description": "The frequency of the student's attendance at classes.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "Never": 0,
+            "Sometimes": 1,
+            "Always": 2
+        }
+    },
+    "taking_notes_classes": {
+        "pretty_name": "Taking Notes in Classes",
+        "description": "If the student takes notes during classes.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "Never": 0,
+            "Sometimes": 1,
+            "Always": 2
+        }
+    },
+    "listening_classes": {
+        "pretty_name": "Listening in Classes",
+        "description": "If the student listens during classes.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "Never": 0,
+            "Sometimes": 1,
+            "Always": 2
+        }
+    },
+    "discussion_improves_interest": {
+        "pretty_name": "Discussion Improves Interest",
+        "description": "If the student believes that discussion improves their interest in the subject.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Never": 0,
+            "Sometimes": 1,
+            "Always": 2
+        }
+    },
+    "area_residency": {
+        "pretty_name": "Area of Residency",
+        "description": "The area where the student resides.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Urban": 0,
+            "Rural": 1
+        }
+    },
+    "size_family": {
+        "pretty_name": "Family Size",
+        "description": "The number of members in the student's family.",
+        "type": "range",
+        "data_type": "int",
+        "modifiable": false,
+        "range": [1, 50],
+        "sigma": 1,
+        "mu": 0
+    },
+    "guardian": {
+        "pretty_name": "Guardian",
+        "description": "The person responsible for the student, if applies.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Don't Have": 0,
+            "Mother": 1,
+            "Father": 2,
+            "Other": 3
+        }
+    },
+    "travel_time": {
+        "pretty_name": "Travel Time",
+        "description": "The number of minutes it takes for the student to travel to school.",
+        "type": "range",
+        "data_type": "int",
+        "modifiable": false,
+        "range": [0, 1440],
+        "sigma": 1,
+        "mu": 0
+    },
+    "failures_past_classes": {
+        "pretty_name": "Failures in Past Classes",
+        "description": "The number of past classes the student has failed.",
+        "type": "range",
+        "data_type": "int",
+        "modifiable": false,
+        "range" :[0, 30],
+        "sigma": 1,
+        "mu": 0
+    },
+    "personal_classes": {
+        "pretty_name": "Personal Classes",
+        "description": "If the student takes personal classes.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "want_take_higher_education": {
+        "pretty_name": "Want to Take Higher Education",
+        "description": "If the student wants to pursue higher education.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "internet_access_home": {
+        "pretty_name": "Internet Access at Home",
+        "description": "If the student has access to the internet at home.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "No": 0,
+            "Yes": 1
+        }
+    },
+    "family_relationship": {
+        "pretty_name": "Family Relationship",
+        "description": "The student's perception of their family relationship.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Very Bad": 0,
+            "Bad": 1,
+            "Neutral": 2,
+            "Good": 3,
+            "Exellent": 4
+        }
+    },
+    "free_time": {
+        "pretty_name": "Free Time",
+        "description": "The student's perception of their amount of free time.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "Very Low": 0,
+            "Low": 1,
+            "Normal": 2,
+            "High": 3,
+            "Very High": 4
+        }
+    },
+    "go_out": {
+        "pretty_name": "Going Out",
+        "description": "The student's perception of their frequency of going out.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "Very Low": 0,
+            "Low": 1,
+            "Normal": 2,
+            "High": 3,
+            "Very High": 4
+        }
+    },
+    "alcohol_workday": {
+        "pretty_name": "Alcohol Consumption on Workdays",
+        "description": "The student's perception of their alcohol consumption on workdays.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "Very Low": 0,
+            "Low": 1,
+            "Normal": 2,
+            "High": 3,
+            "Very High": 4
+        }
+    },
+    "alcohol_weekend": {
+        "pretty_name": "Alcohol Consumption on Weekends",
+        "description": "The student's perception of their alcohol consumption on weekends.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": true,
+        "options": {
+            "Not Known": -1,
+            "Very Low": 0,
+            "Low": 1,
+            "Normal": 2,
+            "High": 3,
+            "Very High": 4
+        }
+    },
+    "health_status": {
+        "pretty_name": "Health Status",
+        "description": "The student's perception of their health status.",
+        "type": "select",
+        "data_type": "int",
+        "modifiable": false,
+        "options": {
+            "Not Known": -1,
+            "Very Bad": 0,
+            "Bad": 1,
+            "Normal": 2,
+            "Good": 3,
+            "Very Good": 4
+        }
+    },
+    "absences": {
+        "pretty_name": "Absences",
+        "description": "The number of absences the student has had.",
+        "type": "range",
+        "data_type": "int",
+        "modifiable": true,
+        "range": [0, 93],
+        "sigma": 1,
+        "mu": 0
+    }
+}

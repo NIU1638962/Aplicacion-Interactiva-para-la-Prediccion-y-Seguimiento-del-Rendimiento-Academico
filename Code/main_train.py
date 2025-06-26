@@ -301,6 +301,14 @@ def main():
 
     model.fit(dataset.inputs, dataset.targets)
 
+    utils.save_pickle(
+        model,
+        environment.os.path.join(
+            environment.TRAINED_MODELS_PATH,
+            'model.pth',
+        ),
+    )
+
     raw_mapping = utils.load_json(
         environment.os.path.join(
             environment.DATA_PATH,

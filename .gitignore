@@ -174,3 +174,7 @@ cython_debug/
 /State of the Art/*.pdf
 /State of the Art/*.htm
 /State of the Art/*.html
+
+Trained Models/
+
+*.pth

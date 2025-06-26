@@ -1,0 +1,8 @@
+{
+    "class_order_file_path": ["static", "class_order.json"],
+    "fields_file_path": ["static", "fields.json"],
+    "model_file_path": ["static", "model.pth"],
+    "original_dataset_file_path": ["static", "dataset.csv"],
+    "server_ip": "localhost",
+    "server_port": 5000
+}

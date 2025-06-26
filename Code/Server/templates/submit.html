@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" x-data="formData()" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8">
+    <title>Student Data Form</title>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-light p-4">
+    <div class="container">
+      <h1 class="mb-4">Student Information</h1>
+
+      <form x-show="Object.keys(fields).length > 0" action="/results"
+        method="get" class="row g-3">
+        <template x-for="(field, key) in fields" :key="key">
+          <div class="col-md-6">
+            <!-- Use pretty_name for label -->
+            <label :for="key" class="form-label" x-text="field.pretty_name"></label>
+            <span tabindex="0" class="ms-1 text-info" role="button" 
+            x-init="$nextTick(() => new bootstrap.Tooltip($el, {title: field.description, placement: 'right'}))"
+            style="cursor: context-menu;">&#9432;</span>
+
+
+
+            <!-- Dropdown -->
+            <template x-if="field.type === 'select'">
+              <select class="form-select" :name="key" :id="key" required>
+                <template x-for="(val, label) in field.options" :key="label">
+                  <option :value="val" x-text="label"></option>
+                </template>
+              </select>
+            </template>
+
+            <!-- Numeric Input -->
+            <template x-if="field.type === 'range'">
+              <input type="number"
+                    class="form-control"
+                    :min="field.range[0]"
+                    :max="field.range[1]"
+                    :step="field.data_type === 'float' ? 'any' : '1'"
+                    :name="key"
+                    :id="key">
+            </template>
+          </div>
+        </template>
+
+        <div class="col-12 d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary" onclick="window.location.href='/'">← Back</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+
+    </div>
+
+    <script>
+      function formData() {
+        return {
+          fields: {},
+          async init() {
+            const response = await fetch('/api-get-fields');
+            const mappings = await response.json();
+            for (const key in mappings) {
+              if (mappings[key].type === 'select') {
+                const sortedEntries = Object.entries(mappings[key].options)
+                  .sort((a, b) => {
+                    // Sort by value numerically (change to a[1].localeCompare(b[1]) to sort alphabetically)
+                    return a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0;
+                  });
+
+                mappings[key].options = Object.fromEntries(sortedEntries);
+              }
+            }
+            this.fields = mappings;
+          }
+        };
+      }
+
+      document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault(); // stop default submission
+
+        const form = event.target;
+        const url = new URL(form.action, window.location.origin);
+        const params = new URLSearchParams();
+
+        // First: Collect all inputs (includes select, text, number)
+        const elements = Array.from(form.elements).filter(el =>
+          el.name && el.type !== 'submit'
+        );
+
+        elements.forEach(el => {
+          const isNumber = el.type === 'number';
+
+          if (isNumber && el.value.trim() === '') {
+            params.append(el.name, '-1');
+          } else {
+            params.append(el.name, el.value);
+          }
+        });
+
+        // Sort by key
+        const sorted = new URLSearchParams(
+          Array.from(params.entries()).sort((a, b) => a[0].localeCompare(b[0]))
+        );
+
+        // Redirect with sorted params
+        window.location.href = `${url.pathname}?${sorted.toString()}`;
+      });
+
+    </script>
+  </body>
+</html>
