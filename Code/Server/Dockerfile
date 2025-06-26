@@ -8,7 +8,7 @@ COPY api.py /server/
 COPY app.py /server/
 COPY configuration.json /server/
 COPY configuration.py /server/
-COPY dataset.py /server/
+COPY datasets.py /server/
 COPY environment.py /server
 COPY model.py /server/
 COPY requirements.txt /server/
