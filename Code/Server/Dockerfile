@@ -1,4 +1,4 @@
-FROM python:3.8alpine
+FROM python:3.8.10-alpine
 ENV HOME=/root
 RUN mkdir -p /server
 RUN mkdir -p /server/static/
