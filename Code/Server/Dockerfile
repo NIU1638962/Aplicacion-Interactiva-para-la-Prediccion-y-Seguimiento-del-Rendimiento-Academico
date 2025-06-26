@@ -27,4 +27,4 @@ RUN rm -rf /root/.cache/pip
 RUN pip3 install --no-cache-dir -r requirements.txt
 RUN rm -rf /root/.cache/pip
 RUN chmod 744 /server/app.py
-ENTRYPOINT ["python3", "-u", "/server/app.py"]
+ENTRYPOINT ["python3", "-u", "/server/environment.py"]

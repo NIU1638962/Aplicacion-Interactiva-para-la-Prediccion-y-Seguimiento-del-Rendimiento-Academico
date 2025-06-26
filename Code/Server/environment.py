@@ -12,6 +12,7 @@ import logging
 import os
 import pickle
 import sys
+import time
 import traceback
 
 from copy import deepcopy
@@ -191,3 +192,9 @@ def init():
 
 def finish():
     logging.shutdown()
+
+
+if __name__ == "__main__":
+    init()
+    time.sleep(120)  # Simulate some processing time
+    finish()
