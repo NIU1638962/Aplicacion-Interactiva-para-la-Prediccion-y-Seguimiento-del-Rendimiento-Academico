@@ -25,7 +25,8 @@
   </head>
   <body class="bg-light p-4">
     <div class="container">
-      <h1 class="mb-4">Results</h1>
+      <h1 class="mb-4" >Results</h1>
+
 
       <!-- Parameters dropdown -->
       <div class="mb-4">
@@ -79,12 +80,15 @@
             <p class="mb-0 fs-5 text-secondary">Calculating recommendation, please wait...</p>
           </div>
         </template>
+      </div>
 
+      <div>
         <template x-if="recommendationResult">
           <div 
             x-show="recommendationResult" 
             x-cloak 
             x-transition
+            class="mb-4"
             :class="recommendationValid 
               ? 'border rounded p-4 bg-white shadow-sm' 
               : 'border rounded p-4 bg-danger-subtle shadow-sm border-danger text-danger'"
@@ -95,15 +99,17 @@
         </template>
       </div>
 
+
       <!-- Buttons below the result box -->
-      <div class="mb-4"></div>
-        <button class="btn btn-secondary me-2" onclick="window.location.href='/submit'">← Back</button>
+      <div class="mb-4 d-flex justify-content-between">
+        <button class="btn btn-secondary" onclick="window.location.href='/submit'">← Back</button>
 
         <!-- Recommendation Button -->
         <template x-if="!recommendationLoading && !recommendationResult">
           <button class="btn btn-primary" @click="getRecommendation()">Get Recommendation</button>
         </template>
       </div>
+
 
       <!-- Error message -->
       <div x-show="error" x-cloak class="alert alert-danger mt-3" role="alert"
@@ -199,16 +205,16 @@
             }
 
             if (result.no_change_possible) {
-              messages.push("No changes recommendation possible because no recommendator feature were given.");
+              messages.push("It was impossible to give a recommendation, since the parameters given about the student, none were parameters considered to be easily changed by the student.");
               if (this.fieldDefs) {
                 const modifiableFields = Object.entries(this.fieldDefs)
                   .filter(([_, def]) => def.modifiable)
                   .map(([_, def]) => `- ${def.pretty_name}`);
-                messages.push("Recommendator features are:\n" + modifiableFields.join('\n'));
+                messages.push("The parameters we consider to be easy to change by a student are the following:\n" + modifiableFields.join('\n'));
               } else {
                 messages.push("Loading modifiable fields...");
               }
-              return messages.join('\n\n');
+              return messages.join('\n');
             }
 
             const modifiedFields = Object.entries(result.feature_changes || {})

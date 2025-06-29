@@ -38,7 +38,7 @@ TIME_EXECUTION = datetime.now(timezone.utc).strftime(
 SEED = 0
 
 # Log level
-LOG_LEVEL = logging.INFO
+LOG_LEVEL = logging.DEBUG
 LOG_LEVEL_NAME = logging.getLevelName(LOG_LEVEL)
 
 # Python version

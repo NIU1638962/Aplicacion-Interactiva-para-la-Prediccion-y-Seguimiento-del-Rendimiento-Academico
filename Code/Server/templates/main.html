@@ -19,11 +19,18 @@
         font-size: 0.9rem;
         color: #6c757d;
       }
+
+      .center-btn-container {
+        min-height: 40vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     </style>
   </head>
   <body class="bg-light d-flex flex-column min-vh-100">
     <div class="container my-5">
-      <h1 class="mb-4">Students Academic Performance Predictor</h1>
+      <h1 class="mb-4 text-center">Students Academic Performance Predictor</h1>
 
       <p class="lead">
         This is a page for an academic project as a base for a Student Performance Predictor and Recommendator 
@@ -32,7 +39,10 @@
         Not all information is required, but the more you provide, the more accurate the prediction and recommendation will be.
       </p>
 
-      <a href="/submit" class="btn btn-primary mt-3">Go to Form</a>
+      <!-- Only the button is centered -->
+      <div class="center-btn-container">
+        <a href="/submit" class="btn btn-primary btn-lg px-5 py-3">Go to Form</a>
+      </div>
     </div>
 
     <footer>

@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="cat">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Index TFG Aplicació Interactiva</title>
+        <style>
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                overflow: hidden;
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+            }
+
+            header {
+                background-color: #007bff;
+                color: white;
+                text-align: center;
+                padding: 1em;
+                font-size: 1.5em;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                flex-shrink: 0;
+            }
+
+            .container {
+                display: flex;
+                flex-direction: row;
+                height: calc(100% - 56px);
+                flex-grow: 1;
+            }
+
+            nav {
+                flex: 1;
+                background-color: #ecf0f1;
+                overflow-y: auto;
+                padding: 3em;
+                box-sizing: border-box;
+                direction: rtl;
+                scrollbar-color: #007bff #ecf0f1;
+            }
+
+            nav::-webkit-scrollbar {
+                width: 8px;
+                background-color: #007bff;
+            }
+
+            nav::-webkit-scrollbar-thumb {
+                background-color: #ecf0f1;
+                border-radius: 4px;
+            }
+
+            nav * {
+                direction: ltr;
+            }
+
+            nav details {
+                margin-bottom: 0.4em;
+            }
+
+            nav summary {
+                font-weight: normal;
+                cursor: pointer;
+                list-style: none;
+                font-size: 1em;
+                padding-left: 0;
+                margin: 0.5em 0;
+                color: #34495e;
+            }
+
+            nav summary::marker {
+                display: none;
+            }
+
+            nav summary::before {
+                content: "▸";
+                display: inline-block;
+                width: 1em;
+                margin-right: 4px;
+                transition: transform 0.2s;
+                color: #34495e;
+            }
+
+            nav details[open] > summary::before {
+                transform: rotate(90deg);
+            }
+
+            nav a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            nav a:hover {
+                color: #2980b9;
+                text-decoration: underline;
+            }
+
+            .level1 summary {
+                margin-left: 0px;
+                font-weight: bold;
+                color: #34495e;
+            }
+
+            .level2 summary {
+                margin-left: 20px;
+                font-weight: normal;
+                font-style: normal;
+                color: #34495e;
+            }
+
+            .level3 summary {
+                margin-left: 40px;
+                font-weight: normal;
+                font-style: normal;
+                color: #808080; /* Dark grey */
+            }
+
+            .level4 summary {
+                margin-left: 60px;
+                font-weight: normal;
+                font-style: normal;
+                color: #999999; /* Light grey */
+            }
+
+            main {
+                max-width: 400px;
+                width: fit-content;
+                padding: 1em;
+                overflow-y: auto;
+                background-color: #ffffff;
+                align-self: center;
+            }
+
+            .info-box {
+                max-width: 600px;
+            }
+
+            .info-box h2 {
+                text-align: center;
+                margin-bottom: 1em;
+            }
+
+            .info-table {
+                display: table;
+                width: 100%;
+            }
+
+            .info-row {
+                display: table-row;
+            }
+
+            .info-label,
+            .info-value {
+                display: table-cell;
+                padding: 0.5em 0.5em;
+                vertical-align: top;
+            }
+
+            .info-label {
+                font-weight: bold;
+                white-space: nowrap;
+                width: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>Index TFG Aplicació Interactiva per a la Predicció i Seguiment del Rendiment Acadèmic</header>
+
+        <div class="container">
+            <nav>
+                <h2>Continguts del TFG</h2>
+                <details class="level1" open>
+                    <summary>
+                        <a href="./Reports/">Informes</a>
+                    </summary>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="file:./Reports/Llista de Canvis.txt">Llista de Canvis</a>
+                        </summary>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Reports/1. Informe Inicial/">Informe Inicial</a>
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Reports/1. Informe Inicial/Informe Inicial.pdf"
+                                    >Arxiu PDF Informe Inicial</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Reports/1. Informe Inicial/Informe Inicial.docx"
+                                    >Arxiu Word Informe Inicial</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Reports/2. Informe de Progrés I/">Informe de Progrés I</a>
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Reports/2. Informe de Progrés I/Informe de Progrés I.pdf"
+                                    >Arxiu PDF Informe de Progrés I</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Reports/2. Informe de Progrés I/Informe de Progrés I.docx"
+                                    >Arxiu Word Informe de Progrés I</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Reports/3. Informe de Progrés II/">Informe de Progrés II</a>
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Reports/3. Informe de Progrés II/Informe de Progrés II.pdf"
+                                    >Arxiu PDF Informe de Progrés II</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Reports/3. Informe de Progrés II/Informe de Progrés II.docx"
+                                    >Arxiu Word Informe de Progrés II</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Reports/4. Proposta Informe Final/">Proposta Informe Final</a>
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Reports/4. Proposta Informe Final/Proposta Informe Final.pdf"
+                                    >Arxiu PDF Proposta Informe Final</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Reports/4. Proposta Informe Final/Proposta Informe Final.docx"
+                                    >Arxiu Word Proposta Informe Final</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Reports/5. Informe Final/">Informe Final</a>
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Reports/5. Informe Final/Informe Final.pdf">Arxiu PDF Informe Final</a>
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Reports/5. Informe Final/Informe Final.docx"
+                                    >Arxiu Word Informe Final</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                </details>
+                <details class="level1" open>
+                    <summary>
+                        <a href="./State of the Art/">Estat de l'Art</a>
+                    </summary>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="file:./State of the Art/Architectures.txt">Arquitectures</a>
+                        </summary>
+                    </details>
+                </details>
+                <details class="level1" open>
+                    <summary>
+                        <a href="./Planning/">Planificació</a>
+                    </summary>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Planning/1. Initial Planning/">Planificació Inicial</a>
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Planning/1. Initial Planning/Initial Planning.pdf"
+                                    >Arxiu PDF Planificació Inicial</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Planning/1. Initial Planning/Initial Planning.png"
+                                    >Imatge PNG Planificació Inicial</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Planning/1. Initial Planning/Initial Planning.gantt"
+                                    >Arxiu GANTT Planificació Inicial</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Planning/2. Real Progress/">Progrés Real</a>
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Planning/2. Real Progress/Real Progress.pdf">Arxiu PDF Progrés Real</a>
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Planning/2. Real Progress/Real Progress.png">Imatge PNG Progrés Real</a>
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Planning/2. Real Progress/Real Progress.gantt"
+                                    >Arxiu GANTT Progrés Real</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                </details>
+                <details class="level1" open>
+                    <summary>
+                        <a href="./Metodology/">Metodología</a>
+                    </summary>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Metodology/1. Full Metodology Model Training/"
+                                >Metodología Completa d'Entrenament dels Models</a
+                            >
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a
+                                    href="file:./Metodology/1. Full Metodology Model Training/Full Metodology Model Training.png"
+                                    >Imatge PNG Metodología Completa d'Entrenament dels Models</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a
+                                    href="./Metodology/1. Full Metodology Model Training/Full Metodology Model Training.drawio"
+                                    download
+                                    >Arxiu DRAWIO Metodología Completa d'Entrenament dels Models</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Metodology/2. Model Traning Metodology/">Metodología d'Entrenament d'un Model</a>
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Metodology/2. Model Traning Metodology/Model Tranning Metodology.png"
+                                    >Imatge PNG Metodología d'Entrenament d'un Mode</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="file:./Metodology/2. Model Traning Metodology/Model Tranning Metodology.drawio"
+                                    >Arxiu DRAWIO Metodología d'Entrenament d'un Mode</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                </details>
+                <details class="level1" open>
+                    <summary>
+                        <a href="./Requirements/">Requeriments del Programari</a>
+                    </summary>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="file:./Requirements/environment.yaml">Entorn de Conda</a>
+                        </summary>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="file:./Requirements/requirements.txt">Requeriments de PIP</a>
+                        </summary>
+                    </details>
+                </details>
+                <details class="level1" open>
+                    <summary>
+                        <a href="./Data">Dades utilitzades</a>
+                    </summary>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="file:./Data/dataset.csv">Dataset Utllitzat (unificació dels altres datasets)</a>
+                        </summary>
+                    </details>
+                    <details class="level3" open>
+                        <summary>
+                            <a href="./Data/general_mapping.json">Mapeig del format del nostre dataset</a>
+                        </summary>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Data/1. predict+students+dropout+and+academic+success [24]/"
+                                >Predict Student's Droupout and Academic Success Dataset</a
+                            >
+                            [<a href="https://doi.org/10.24432/C5MC89" target="_blank">24</a>]
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Data/1. predict+students+dropout+and+academic+success [24]/data.csv">Data</a>
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Data/1. predict+students+dropout+and+academic+success [24]/mapping_data.py"
+                                    >Mapeig del format de les dades al format comú del nostre dataset</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Data/2. higher+education+students+performance+evaluation [25]/"
+                                >Higher Education Students Performance Evaluation Dataset</a
+                            >
+                            [<a href="https://doi.org/10.24432/C51G82" target="_blank">25</a>]
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Data/2. higher+education+students+performance+evaluation [25]/data.csv"
+                                    >Data</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a
+                                    href="./Data/2. higher+education+students+performance+evaluation [25]/mapping_data.py"
+                                    >Mapeig del format de les dades al format comú del nostre dataset</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Data/3. student-performance-data [26]/">Student Performance Data Dataset</a>
+                            [<a href="https://doi.org/10.24432/C5TG7T" target="_blank">26</a>]
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Data/3. student-performance-data [26]/data.csv">Data</a>
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Data/3. student-performance-data [26]/mapping_data.py"
+                                    >Mapeig del format de les dades al format comú del nostre dataset</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                </details>
+                <details class="level1" open>
+                    <summary>
+                        <a href="./Code/">Codi</a>
+                    </summary>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Code/Model Test and Training/">Codi Entrenament i Test Models </a>
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Code/Model Test and Training/environment.py"
+                                    >Codi Python del Entorn utilitzat per tot el codi d'Entrenament i Test del Model
+                                    (environment.py)</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Code/Model Test and Training/utils.py"
+                                    >Codi Python Utilitats Generals utilitzat per tot el codi d'Entrenament i Test del
+                                    Model (utils.py)</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Code/Model Test and Training/main_train.py"
+                                    >Codi Python Principal (main_train.py)</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Code/Model Test and Training/data_merge.py"
+                                    >Codi Python per Unificar Datasets en un Únic (data_merge.py)</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Code/Model Test and Training/datasets.py"
+                                    >Codi Python per Crear Datasets pels Experiemnts amb K-Folds (datasets.py)</a
+                                >
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Code/Model Test and Training/metrics.py"
+                                    >Codi Python per Calcular les Metriques (metrics.py)</a
+                                >
+                            </summary>
+                        </details>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Code/Server/">Codi del Aplicatiu</a>
+                        </summary>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Code/Server/server.sh">Codi Executar Servidor en Docker (server.sh)</a>
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Code/Server/Dockerfile">Codi Docker (Dockerfile)</a>
+                            </summary>
+                        </details>
+                        <details class="level3" open>
+                            <summary>
+                                <a href="./Code/Server/app.py">Codi App Principal (app.py)</a>
+                            </summary>
+                        </details>
+                    </details>
+                </details>
+                <details class="level1" open>
+                    <summary>
+                        <a href="./Results/">Results</a>
+                    </summary>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Results/experiment_1/">Resultats Experiments 1</a>
+                        </summary>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Results/experiment_2/">Resultats Experiments 2</a>
+                        </summary>
+                    </details>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./Results/experiment_3/">Resultats Experiments 3</a>
+                        </summary>
+                    </details>
+                </details>
+                <details class="level1" open>
+                    <summary>
+                        <a href="./References/">Referències </a>
+                    </summary>
+                    <details class="level2" open>
+                        <summary>
+                            <a href="./References/References (IEEE).txt">Arxiu Text Referències IEEE</a>
+                        </summary>
+                    </details>
+                </details>
+                <details class="level1" open>
+                    <summary>
+                        <a href="file:./LICENSE">Llicència </a>
+                    </summary>
+                </details>
+            </nav>
+
+            <main>
+                <div class="info-box">
+                    <h2>Informació del TFG</h2>
+                    <div class="info-table">
+                        <div class="info-row">
+                            <div class="info-label">Nom alumne:</div>
+                            <div class="info-value">Joel Tapia Salvador</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Grau:</div>
+                            <div class="info-value">Enginyeria de Dades</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Títol TFG:</div>
+                            <div class="info-value">
+                                Aplicació Interactiva per a la Predicció i Seguiment del Rendiment Acadèmic
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Nom tutor:</div>
+                            <div class="info-value">Oriol Cortés Comellas</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Curs:</div>
+                            <div class="info-value">2024-2025</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Data:</div>
+                            <div class="info-value">2 de Juliol de 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

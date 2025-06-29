@@ -1,0 +1,53 @@
+- Informe Inicial:
+	- Afegit Títol, Resum i Paraules clau en Catalá i Anglès.
+	- Afegit Introducció.
+	- Afegit Estat de L'Art.
+		- Afegit Model Predictiu.
+		- Aplicatiu Interactiu.
+	- Afegit Metodologia.
+		- Metodologia Entrenament Model.
+			- Afegit Figura 1 (Diagrama de la metodologia general K-Fold per l’entrenament dels models).
+		- Metodologia de Decisió de Models.
+			- Afegit Figura 2 (Diagrama de la metodologia a seguir per decidir el millor model per l’aplicatiu).
+		- Metodologia Desenvolupament Aplicatiu.
+	- Afegit Planificació.
+		- Afegit Figura 3 (Diagrama de Gant amb la planificació del projecte fins la presentació final).
+	- Afegit Bibliografía [1-23].
+- Informe Progrés I:
+	- Afegit Data.
+	- Afegit Entrenament Models.
+	- Expandit Bibliografía [24-29].
+	- Correccions gramaticals i ortogràfiques.
+- Informe Progrés II:
+	- Reduit Planificació.
+		- Eliminar Figura 3.
+	- Expandit Entrenament Models.
+		- Afegit Taula 1 (Mitjana mètriques classificacions sobre folds), 2 (Mitjana mètriques regressions sobre folds) i 3 (Mitjana mètriques dt sobre folds).
+	- Afegit Conclusions.
+	- Afegit Apèndix A Planificació.
+		- Afegit imatge planificació.
+	- Correccions gramaticals i ortogràfiques.
+- Proposta Informe Final:
+	- Expnait Metodologia.
+		- Afegit Metodologia Recomandor de Millores
+	- Expandit Data.
+	- Expandit Entrenament Models.
+		- Modificat Taula 1 (Mitjana i desviació estàndard de les mètriques de classificacions sobre folds), 2 (Mitjana i desviació estàndard de les mètriques de regressions sobre folds) i 3 (Mitjana i desviació estàndard de les mètriques de classifiacions de RF Classifier sobre folds).
+		- Afegit Taula 4 (Mitjana i desviació estàndard de les mètriques de regresssions de RF Classifier sobre folds).
+	- Afegit Recomanador.
+		- Afegit Taula 5 (Resultats del recomanador del model sobre la base de dades).
+	- Expandit Conclusions.
+	- Expandit Apèndix A Planificació.
+		- Afegit imatge progrés real projecte.
+	- Correccions gramaticals i ortogràfiques.
+- Informe Final:
+	- Modificat estils Taules 1, 2, 3, 4, 5.
+	- Expandit Recomanador.
+		- Afegit Figura 3 (Gràfic importància dels diferents paràmetres d’un estudiant en la predicció del model, comparant els classificats com fàcilment modificables per un estudiant).
+	- Afegit Aplicatiu Interactiu.
+	- Expandit Conclusions.
+	- Expandit Bibliografía [30, 31].
+	- Modificat Apèndix A Planificació.
+		- 
+
+	

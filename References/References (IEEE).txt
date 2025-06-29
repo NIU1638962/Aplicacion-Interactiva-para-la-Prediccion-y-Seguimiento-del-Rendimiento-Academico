@@ -27,16 +27,5 @@
 [27]	NumFOCUS, Inc. Pandas. (2025). pandas. Available: https://pandas.pydata.org
 [28]	Skcit-learn. Skcit-learn. (2025). Skcit-learn. Available: https://scikit-learn.org/stable
 [29]	Pytorch. The Linux Fundation. (2025). PyTorch. Available: https://pytorch.org
-
-	J. K. Author. Title of Software. Date Repository or Archive. (version or year). Publisher Name. Accessed: Date (when applicable). [Type of Medium]. Global Persistent Identifier. Available: site/path/file
-
-
-
-[]	N. V. Chawla, K. W. Bowyer, L. O. ​ Hall, and W. P. Kegelmeyer, "SMOTE: Synthetic Minority Over-sampling Technique", Journal of Artificial Intelligence Research, vol. 16, pp. ​ 321-357, 2002. doi: https://doi.org/10.1613/jair.953.
-[]	A. Ali, S. M. Shamsuddin, and A. L. Ralescu, "Classification with class imbalance problem: A review", Int. J. Advance Soft Compu. Appl, vol. 5, no. 3, pp. 176–204, 2013. Available: https://www.researchgate.net/publication/288228469_Classification_with_class_imbalance_problem_A_review
-[]	J. Tanha, Y. Abdi, N. Samadi, N. Razzaghi, and M. Asadpour, "Boosting methods for multi-class imbalanced data classification: an experimental review", Journal of Big Data, vol. 7, no. 1, Sep. 2020, doi: https://doi.org/10.1186/s40537-020-00349-y.
-[]	H. He, Y. Bai, E. A. Garcia, and S. Li, "ADASYN: Adaptive synthetic sampling approach for imbalanced learning", in 2008 IEEE International Joint Conference on Neural Networks (IEEE World Congress on Computational Intelligence), 2008, pp. 1322–1328. doi: https://doi.org/10.1109/IJCNN.2008.4633969.
-
-
-[]	
-[]	
+[30]	Docker Inc. Docker. (2025). Docker. Available: https://www.docker.com
+[31]	DigitalOcean, LLC. DigitalOcean. (2025). DigitalOcean. Availa-ble: https://www.digitalocean.com
