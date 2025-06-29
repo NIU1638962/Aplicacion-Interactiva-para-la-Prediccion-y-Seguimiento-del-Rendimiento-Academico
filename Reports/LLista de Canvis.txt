@@ -45,9 +45,10 @@
 	- Expandit Recomanador.
 		- Afegit Figura 3 (Gràfic importància dels diferents paràmetres d’un estudiant en la predicció del model, comparant els classificats com fàcilment modificables per un estudiant).
 	- Afegit Aplicatiu Interactiu.
+		- Afegit Figura 4 (Pàgina principal de l’Aplicatiu), 5 (Pàgina del formulari de l’Aplicatiu) i 6 (Pàgina dels resultats i recomanacions de l’Aplicatiu).
 	- Expandit Conclusions.
 	- Expandit Bibliografía [30, 31].
 	- Modificat Apèndix A Planificació.
-		- 
+		- Modificat imatge progrés real projecte.
 
 	
